@@ -1,9 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import classes from './Navbar.module.css';
 
-import logo from '../../assets/logo.svg';
-import search from '../../assets/search.svg';
-import avatar from '../../assets/avatar.svg';
+import logo from '../../../assets/logo.svg'
+import search from '../../../assets/search.svg';
+import avatar from '../../../assets/avatar.svg';
 
 const Navbar = () => {
 

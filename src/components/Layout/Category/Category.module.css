@@ -1,0 +1,33 @@
+.category {
+  margin-bottom: 6.4rem;
+}
+
+.category h1 {
+  font-size: 4.5rem;
+  padding: 3.2rem 0;
+  letter-spacing: -.01em;
+  color: #fff;
+}
+
+.item img {
+  border-radius: 50%;
+  width: 22.6rem;
+  cursor: pointer;
+}
+
+.item h4 {
+  color: #fff;
+  font-size: 1.6rem;
+  text-align: center;
+  width: 22.6rem;
+  margin: .8rem 0 .5rem;
+  letter-spacing: .05em;
+}
+
+.item p {
+  color:#fff;
+  opacity: 50%;
+  font-size: 1.6rem;
+  text-align: center;
+  width: 22.6rem;
+}
