@@ -24,22 +24,21 @@ const Category = (props) => {
   };
 
   return (
-    <div className={classes.category}>
+    <section className={classes.category}>
       <h1>{props.title}</h1>
-      <Carousel
+      {<Carousel
         responsive={responsive}
         removeArrowOnDeviceType={["tablet", "mobile"]}
-        className={classes.item}
       >
         {props.items.map(item =>
-          <div key={item.id}>
-            <img src={item.img} alt={item.artist} />
-            <h4>{item.artist}</h4>
+          <div key={item.id} className={classes.item}>
+            <img src={item.imgURL} alt={item.name} />
+            <h4>{item.name}</h4>
             <p>{item.subscribers}</p>
           </div>
         )}
-      </Carousel>
-    </div>
+      </Carousel>}
+    </section>
   );
 }
 

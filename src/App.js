@@ -10,6 +10,9 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
+
+        <Route path='/artist/:artist' ></Route>
+
         <Route path='/explore'> </Route>
         <Route path='/library'> </Route>
       </Switch>
