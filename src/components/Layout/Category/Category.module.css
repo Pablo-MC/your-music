@@ -17,7 +17,6 @@
 
 .item img {
   width: 100%;
-  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -28,4 +27,12 @@
 
 .item p {
   opacity: 50%;
+}
+
+.artist {
+  border-radius: 50%;
+}
+
+.album {
+  border-radius: 2%;
 }

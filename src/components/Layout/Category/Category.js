@@ -32,9 +32,9 @@ const Category = (props) => {
       >
         {props.items.map(item =>
           <div key={item.id} className={classes.item}>
-            <img src={item.imgURL} alt={item.name} />
-            <h4>{item.name}</h4>
-            <p>{item.subscribers}</p>
+            <img src={item.imgURL} alt={item.name || item.album} className={classes[`${props.imgStyle}`]} />
+            <h4>{item.name || item.album}</h4>
+            <p>{item.subscribers || item.artist}</p>
           </div>
         )}
       </Carousel>}
