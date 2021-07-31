@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getTopArtists, getTopAlbums } from '../lib/api';
 
 import Container from "../components/UI/Container";
 import Category from "../components/Layout/Category/Category";
-
-// import axios from 'axios';
 
 const Home = () => {
   const [artists, setArtists] = useState([]);
@@ -20,27 +18,18 @@ const Home = () => {
     fetchData()
   }, []);
 
-  ////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
   return (
     <main>
       <Container>
         <Category
           title='Artistas populares'
           items={artists}
-          imgStyle='artist'
+          category='artists'
         />
         <Category
           title='Tu música para el atardecer'
           items={albums}
-          imgStyle='album'
+          category='albums'
         />
         {/* <Category
           title='Videos musicales recomendados'

@@ -3,7 +3,7 @@
   color: #fff;
 }
 
-.category h1 {
+.category h2 {
   font-size: 4.5rem;
   padding: 3.2rem 0;
   letter-spacing: -.01em;
@@ -29,10 +29,10 @@
   opacity: 50%;
 }
 
-.artist {
+.artists {
   border-radius: 50%;
 }
 
-.album {
+.albums {
   border-radius: 2%;
 }

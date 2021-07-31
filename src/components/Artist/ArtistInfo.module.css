@@ -1,0 +1,24 @@
+.content {
+  padding-top: 50rem;
+  color: #fff;
+}
+
+.content h2 {
+  font-size: 4.5rem;
+  margin-bottom: 1.6rem;
+
+}
+
+.content p {
+  font-size: 1.4rem;
+  width: 64rem;
+  margin-bottom: 1.6rem;
+}
+
+.content button {
+  padding: .6rem 1.6rem;
+  margin-right: .8rem;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
