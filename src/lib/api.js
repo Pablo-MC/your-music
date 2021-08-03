@@ -12,10 +12,9 @@ export const getTopArtists = async function () {
     return artistsData
       .filter(item => item.artists !== null)
       .flatMap(i => [{
-        id: i.artists[0].idArtist,
-        name: i.artists[0].strArtist,
+        artist: i.artists[0].strArtist, // nombre artista
         imgURL: i.artists[0].strArtistThumb,
-        subscribers: new Intl.NumberFormat('es-AR').format(+i.artists[0].idArtist) + ' suscriptores',
+        subscribers: new Intl.NumberFormat('es-AR').format(+i.artists[0].idArtist) + ' suscriptores', // Número de subscriptores ficticio.  
       }]);
 
   } catch (error) {
@@ -23,6 +22,7 @@ export const getTopArtists = async function () {
   }
 }
 
+// Obtener de 15 artistas Top aleatorios, 1 de sus 3 mejores albumes aleatoriamente. 
 export const getTopAlbums = async function () {
   try {
     const artists = await getRandomTopArtist(); // ["David Bowie", "Tyler, the Creator", "Eminem", ...]
@@ -36,10 +36,9 @@ export const getTopAlbums = async function () {
 
     return albumsData
       .flatMap(album => [{
-        id: album.topalbums.album[randomAlbum].artist.name,
         artist: album.topalbums.album[randomAlbum].artist.name,
         album: album.topalbums.album[randomAlbum].name,
-        imgURL: album.topalbums.album[randomAlbum].image[3]['#text']
+        imgURL: album.topalbums.album[randomAlbum].image[3]['#text'],
       }]);
 
   } catch (error) {
@@ -50,36 +49,36 @@ export const getTopAlbums = async function () {
 export const getArtistData = async function (artist) {
   try {
     // Imágen de Fondo. OBS: Sino existe la foto entonces retornar un mensaje de que el artista no fue encontrado.
-    const imgBackground = await axios(`https://theaudiodb.com/api/v1/json/1/search.php?s=${artist}`)
+    const imgBackground = await axios(`https://theaudiodb.com/api/v1/json/1/search.php?s=${artist}`);
     // if (!imgBackground.ok) throw new Error(`El artista no fue encontrado. Error ${imgBackground.status}`)
 
     // Nombre, Biografía, Cantidad de oyentes.
-    const info = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json`)
+    const info = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json`);
+    if (!info.data.artist.bio.summary) return;
 
-    // Lista de las 10 mejores canciones:
-    const topTenTracksList = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json&limit=10`); // ['trackName', 'trackName', ...]
+    const albumsData = await getTopTenAlbums(artist);
 
-    const tracksPromise = topTenTracksList.data.toptracks.track
-      .map(song => fetch(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${process.env.REACT_APP_API_KEY}&artist=${artist}&track=${song.name}&format=json`).then(res => res.json())); // [Promise, Promise, ...]
-
-    const tracksData = await Promise.all(tracksPromise); // [{track}, {track}, ...]
+    const tracksData = await getTopTenTracks(artist);
 
     const artistData = {
       imgBackURL: imgBackground.data.artists[0].strArtistFanart,
-      name: info.data.artist.name,
-      biography: info.data.artist.bio.summary,
+      artist: info.data.artist.name,
+      biography: info.data.artist.bio?.summary,
       listeners: info.data.artist.stats.listeners,
-      tracks: tracksData
+      albums: albumsData, // []
+      tracks: tracksData, // []
     };
 
     return artistData;
 
   } catch (error) {
-    console.error(error.message);
+    console.error('No se encontró informacion sobre el artista', error.message);
   }
 }
 
-//////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// Retorna un array con el nombre (string) de 15 artistas Top aleatorios.
 const getRandomTopArtist = async function () {
   try {
     const page = Math.floor((Math.random() * (4 - 1 + 1)) + 1);
@@ -95,5 +94,48 @@ const getRandomTopArtist = async function () {
 
   } catch (error) {
     console.error(error.message);
+  }
+}
+
+// Retorna un array de objetos con la informacion de las 10 mejores canciones de un artista:
+const getTopTenTracks = async function (artist) {
+  try {
+    const topTenTracksList = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json&limit=10`); // ['trackName', 'trackName', ...]
+
+    const tracksPromise = topTenTracksList.data.toptracks.track
+      .map(track => fetch(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${process.env.REACT_APP_API_KEY}&artist=${artist}&track=${track.name}&format=json`).then(res => res.json())); // [Promise, Promise, ...]
+
+    const tracks = await (await Promise.all(tracksPromise))
+      .filter(track => track.track.album !== undefined)
+      .flatMap(track => [
+        {
+          artist: track.track.artist?.name,
+          track: track.track.name,
+          duration: track.track.duration,
+          album: track.track.album?.title,
+          imgURL: track.track.album?.image[3]['#text'],
+        }
+      ]);
+
+    return tracks; // [{track}, {track}, ...]
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+// Retorna un array de objetos con la informacion de los 10 mejores albumes de un artista:
+const getTopTenAlbums = async function (artist) {
+  try {
+    const topTenAlbumsList = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json&limit=10`);
+
+    const albumsData = topTenAlbumsList.data.topalbums.album
+      .flatMap(album => [{ album: album.name, imgURL: album.image[3]['#text'] }])
+      .filter(album => album.imgURL !== '');
+
+    return albumsData;
+
+  } catch (error) {
+    console.log(error.message);
   }
 }

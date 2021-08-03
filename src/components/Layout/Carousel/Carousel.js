@@ -1,11 +1,14 @@
 import { useHistory } from 'react-router';
-import classes from './Category.module.css';
-
-import Carousel from 'react-multi-carousel';
+import shortid from 'shortid';
+import SliderCarousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 
-const Category = (props) => {
+import classes from './Carousel.module.css';
+
+const Carousel = ({ title, items, category }) => {
   const history = useHistory();
+
+  // const { title, items, category } = props;
 
   const responsive = {
     desktop: {
@@ -40,26 +43,26 @@ const Category = (props) => {
 
   return (
     <section className={classes.category}>
-      <h2>{props.title}</h2>
-      {<Carousel
+      {title && <h2>{title}</h2>}
+      <SliderCarousel
         responsive={responsive}
         removeArrowOnDeviceType={["tablet", "mobile"]}
       >
-        {props.items.map(item =>
-          <div key={item.id} className={classes.item}>
+        {items.map(item =>
+          <div key={shortid.generate()} className={classes.item}>
             <img
               src={item.imgURL}
-              alt={item.name || item.album}
-              className={classes[`${props.category}`]}
-              onClick={(e) => categoryHandler(props.category, e.target.alt)}
+              alt={item.artist || item.album}
+              className={classes[`${category}`]}
+              onClick={(e) => categoryHandler(category, e.target.alt)}
             />
-            <h4>{item.name || item.album}</h4>
-            <p>{item.subscribers || item.artist}</p>
+            <h4>{category === 'artists' ? item.artist : item.album}</h4>
+            <p>{item.subscribers || item.artist || null}</p>
           </div>
         )}
-      </Carousel>}
+      </SliderCarousel>
     </section>
   );
 }
 
-export default Category;
+export default Carousel;

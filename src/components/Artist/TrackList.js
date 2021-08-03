@@ -4,17 +4,19 @@ import classes from './TrackList.module.css';
 import Container from '../UI/Container';
 import Track from './Track';
 
-const TrackList = (props) => {
+const TrackList = ({ tracks }) => {
   return (
     <Container>
       <section className={classes.tracks}>
         <h2>Canciones</h2>
-        {props.tracks.map(track =>
-          <Track
-            key={shortid.generate()}
-            data={track}
-          />
-        )}
+        {tracks
+          // .filter(track => !track.error)
+          .map(track =>
+            <Track
+              key={shortid.generate()}
+              data={track}
+            />
+          )}
       </section>
     </Container>
   );

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { getTopArtists, getTopAlbums } from '../lib/api';
 
-import Container from "../components/UI/Container";
-import Category from "../components/Layout/Category/Category";
+import Container from '../components/UI/Container';
+import Carousel from '../components/Layout/Carousel/Carousel';
 
 const Home = () => {
   const [artists, setArtists] = useState([]);
@@ -21,20 +21,24 @@ const Home = () => {
   return (
     <main>
       <Container>
-        <Category
-          title='Artistas populares'
-          items={artists}
-          category='artists'
-        />
-        <Category
-          title='Tu música para el atardecer'
-          items={albums}
-          category='albums'
-        />
-        {/* <Category
-          title='Videos musicales recomendados'
-          items={videos}
-        /> */}
+        {artists.length !== 0 && albums.length !== 0 &&
+          <Fragment>
+            <Carousel
+              title='Artistas populares'
+              items={artists}
+              category='artists'
+            />
+            <Carousel
+              title='Tu música para el atardecer'
+              items={albums}
+              category='albums'
+            />
+            {/* <Category
+              title='Videos musicales recomendados'
+              items={videos}
+            /> */}
+          </Fragment>
+        }
       </Container>
     </main>
   );

@@ -1,13 +1,14 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router';
-import { getArtistData } from "../lib/api";
+import { getArtistData } from '../lib/api';
 
-import ArtistInfo from '../components/Artist/ArtistInfo';
+import MainInfo from '../components/Artist/MainInfo';
 import TrackList from '../components/Artist/TrackList';
+import AlbumList from '../components/Artist/AlbumList';
 
 const Artist = () => {
   const params = useParams();
-  const [artist, setArtist] = useState([]);
+  const [artist, setArtist] = useState({});
 
   useEffect(() => {
     async function fetchData() {
@@ -15,15 +16,16 @@ const Artist = () => {
       setArtist(artistData);
     }
     fetchData();
-  }, [params.artist])
+  }, [params.artist]);
 
   return (
     <Fragment>
-      {artist.length !== 0 &&
-        <div>
-          <ArtistInfo data={artist} />
+      {Object.entries(artist || {}).length !== 0 &&
+        <>
+          <MainInfo info={artist} />
           <TrackList tracks={artist.tracks} />
-        </div>
+          <AlbumList albums={artist.albums} />
+        </>
       }
     </Fragment>
   );

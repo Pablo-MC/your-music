@@ -1,11 +1,11 @@
-import classes from './ArtistInfo.module.css';
+import classes from './MainInfo.module.css';
 
 import Container from '../UI/Container';
 
-const ArtistInfo = (props) => {
+const MainInfo = (props) => {
 
   // Aplicar filtro en la request para TODAS las propiedades en caso de que no existan!. (.name, .biography, .listeners, .imgBackURL)
-  const { name, biography, listeners, imgBackURL } = props.data;
+  const { artist, biography, listeners, imgBackURL } = props.info;
 
   const background = {
     backgroundImage: `url(${imgBackURL})`,
@@ -43,7 +43,7 @@ const ArtistInfo = (props) => {
     <section style={background}>
       <Container>
         <div className={classes.content}>
-          <h2>{name}</h2>
+          <h2>{artist}</h2>
           <p>{biography}</p>
           {/* Agregar acá la opción de exapandir/contraer la biografía 'MÁS/MENOS'*/}
           <div>
@@ -57,4 +57,4 @@ const ArtistInfo = (props) => {
   );
 }
 
-export default ArtistInfo;
+export default MainInfo;
