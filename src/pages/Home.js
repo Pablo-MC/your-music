@@ -18,6 +18,12 @@ const Home = () => {
     fetchData()
   }, []);
 
+  // Obtener y almacenar el token (access_token) DE LA URL en localStorage para poder usar el reproductor de Spotify.
+  const url = window.location.hash;
+  const tokenPlayer = url.slice(url.indexOf('=') + 1, url.indexOf('&'));
+  localStorage.setItem('token', tokenPlayer);
+
+
   return (
     <main>
       <Container>

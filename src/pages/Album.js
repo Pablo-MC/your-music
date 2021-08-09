@@ -1,6 +1,8 @@
 const Album = () => {
   return (
-    <p>Album: ...</p>
+    <div>
+      <p>Album: ...</p>
+    </div>
   );
 }
 

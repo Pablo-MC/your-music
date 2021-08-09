@@ -41,12 +41,30 @@ const Carousel = ({ title, items, category }) => {
     }
   }
 
+  // function CustomRightArrow({ onClick }) {
+  //   return (
+  //     <button
+  //       // onClick={handleClick}
+  //       aria-label="Go to next slide"
+  //       className="react-multiple-carousel__arrow react-multiple-carousel__arrow--right"
+  //     // className={classes['react-multiple-carousel__arrow]['react-multiple-carousel__arrow--right']}
+  //     // className={classes['react-multiple-carousel__arrow--right']}
+
+  //     />
+  //   );
+  // }
+
+
   return (
-    <section className={classes.category}>
+    <section className={classes.carousel}>
       {title && <h2>{title}</h2>}
       <SliderCarousel
         responsive={responsive}
         removeArrowOnDeviceType={["tablet", "mobile"]}
+      // itemClass={}
+      // centerMode={true}
+      // focusOnSelect={true}
+      // customRightArrow={<CustomRightArrow />}
       >
         {items.map(item =>
           <div key={shortid.generate()} className={classes.item}>

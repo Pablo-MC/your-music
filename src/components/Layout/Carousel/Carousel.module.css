@@ -1,9 +1,9 @@
-.category {
+.carousel {
   margin-bottom: 6.4rem;
   color: #fff;
 }
 
-.category h2 {
+.carousel h2 {
   font-size: 4.5rem;
   padding: 3.2rem 0;
   letter-spacing: -.01em;
@@ -12,7 +12,7 @@
 .item {
   width: 22.6rem;
   text-align: center;
-  font-size: 1.6rem;  
+  font-size: 1.6rem;
 }
 
 .item img {
@@ -36,3 +36,13 @@
 .albums {
   border-radius: 2%;
 }
+
+
+
+/* Arrow */
+
+/* .react-multiple-carousel__arrow--right {
+  display: block;
+  background: #fff;
+  color: #fff;
+} */

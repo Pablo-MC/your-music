@@ -58,7 +58,8 @@ export const getArtistData = async function (artist) {
 
     const albumsData = await getTopTenAlbums(artist);
 
-    const tracksData = await getTopTenTracks(artist);
+    // const tracksData = await getTopTenTracks(artist);
+    const tracksData = await (await getTopTenTracks(artist)).flatMap(item => [{ ...item, song: getTrackSpotify(item.artist, item.track) }]);
 
     const artistData = {
       imgBackURL: imgBackground.data.artists[0].strArtistFanart,
@@ -134,6 +135,53 @@ const getTopTenAlbums = async function (artist) {
       .filter(album => album.imgURL !== '');
 
     return albumsData;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+
+///////////////////////////////////////////////////////
+// Spotify
+
+const client_id = '8770d9edb0a349119d068564de97ad04';
+const client_secret = '9de95ea1cad945848fee81a54a7875ab';
+
+// Obtener el token de acceso para hacer las solicitudes a la API de Spotify. OBS: expira en 1hr
+const accessToken = async function () {
+  try {
+    const res = await axios('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        // 'Authorization': 'Basic ' + btoa(`${client_id}:${client_secret}`)
+        'Authorization': 'Basic ' + (new Buffer(`${client_id}:${client_secret}`).toString('base64')),
+      },
+      data: 'grant_type=client_credentials',
+    });
+
+    return res.data.access_token;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+// Obtener la canción de un artista.
+const getTrackSpotify = async function (artist, track) {
+  try {
+    const res = await axios(`https://api.spotify.com/v1/search?q=${artist} ${track}&type=track&limit=1`, {
+      'method': 'GET',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + accessToken(),
+      }
+    });
+
+    return { uri: res.data.tracks.items[0].uri };
+    // return res.data.tracks.items[0].uri;
 
   } catch (error) {
     console.log(error.message);
