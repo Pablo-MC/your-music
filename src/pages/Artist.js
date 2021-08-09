@@ -5,10 +5,13 @@ import { getArtistData } from '../lib/api';
 import MainInfo from '../components/Artist/MainInfo';
 import TrackList from '../components/Artist/TrackList';
 import AlbumList from '../components/Artist/AlbumList';
+import Player from '../components/Player/Player';
 
 const Artist = () => {
   const params = useParams();
+
   const [artist, setArtist] = useState({});
+  const [track, setTrack] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -18,12 +21,21 @@ const Artist = () => {
     fetchData();
   }, [params.artist]);
 
+  const playerHandler = (track) => {
+    setTrack(track);
+  }
+
+  console.log(artist.tracks);
+
   return (
     <Fragment>
       {Object.entries(artist || {}).length !== 0 &&
         <>
           <MainInfo info={artist} />
-          <TrackList tracks={artist.tracks} />
+          <TrackList tracks={artist.tracks} onPlayer={playerHandler} />
+
+          <Player track={track} />
+
           <AlbumList albums={artist.albums} />
         </>
       }

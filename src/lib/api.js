@@ -1,5 +1,26 @@
 import axios from 'axios';
 
+// Obtener el token de acceso para hacer las solicitudes a la API de Spotify. OBS: expira en 1hr
+// Client Credentials Flow: https://developer.spotify.com/documentation/general/guides/authorization-guide/
+export const getAccessToken = async function () {
+  try {
+    const res = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + (new Buffer(`${process.env.REACT_APP_CLIENT_ID}:${process.env.REACT_APP_CLIENT_SECRET}`).toString('base64')),
+      },
+      body: 'grant_type=client_credentials',
+    });
+
+    const data = await res.json();
+    return data.access_token;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export const getTopArtists = async function () {
   try {
     const artists = await getRandomTopArtist(); // ["David Bowie", "Tyler, the Creator", "Eminem", ...]
@@ -58,8 +79,7 @@ export const getArtistData = async function (artist) {
 
     const albumsData = await getTopTenAlbums(artist);
 
-    // const tracksData = await getTopTenTracks(artist);
-    const tracksData = await (await getTopTenTracks(artist)).flatMap(item => [{ ...item, song: getTrackSpotify(item.artist, item.track) }]);
+    const tracksData = await getTopTenTracks(artist);
 
     const artistData = {
       imgBackURL: imgBackground.data.artists[0].strArtistFanart,
@@ -104,19 +124,26 @@ const getTopTenTracks = async function (artist) {
     const topTenTracksList = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json&limit=10`); // ['trackName', 'trackName', ...]
 
     const tracksPromise = topTenTracksList.data.toptracks.track
-      .map(track => fetch(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${process.env.REACT_APP_API_KEY}&artist=${artist}&track=${track.name}&format=json`).then(res => res.json())); // [Promise, Promise, ...]
+      .map(track => fetch(`https://api.spotify.com/v1/search?q=${artist} ${track.name}&type=track&limit=1`, {
+        'method': 'GET',
+        'headers': {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        }
+      }).then(res => res.json())); // [Promise, Promise, ...]
 
-    const tracks = await (await Promise.all(tracksPromise))
-      .filter(track => track.track.album !== undefined)
+    const tracks = (await Promise.all(tracksPromise))
       .flatMap(track => [
         {
-          artist: track.track.artist?.name,
-          track: track.track.name,
-          duration: track.track.duration,
-          album: track.track.album?.title,
-          imgURL: track.track.album?.image[3]['#text'],
+          artist: track.tracks.items[0].artists[0].name,
+          album: track.tracks.items[0].album.name,
+          imgAlbumURL: track.tracks.items[0].album.images[2].url,
+          trackTitle: track.tracks.items[0].name,
+          trackURI: track.tracks.items[0].uri,
+          duration: track.tracks.items[0].duration_ms,
         }
-      ]);
+      ])
 
     return tracks; // [{track}, {track}, ...]
 
@@ -135,53 +162,6 @@ const getTopTenAlbums = async function (artist) {
       .filter(album => album.imgURL !== '');
 
     return albumsData;
-
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-
-///////////////////////////////////////////////////////
-// Spotify
-
-const client_id = '8770d9edb0a349119d068564de97ad04';
-const client_secret = '9de95ea1cad945848fee81a54a7875ab';
-
-// Obtener el token de acceso para hacer las solicitudes a la API de Spotify. OBS: expira en 1hr
-const accessToken = async function () {
-  try {
-    const res = await axios('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        // 'Authorization': 'Basic ' + btoa(`${client_id}:${client_secret}`)
-        'Authorization': 'Basic ' + (new Buffer(`${client_id}:${client_secret}`).toString('base64')),
-      },
-      data: 'grant_type=client_credentials',
-    });
-
-    return res.data.access_token;
-
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-// Obtener la canción de un artista.
-const getTrackSpotify = async function (artist, track) {
-  try {
-    const res = await axios(`https://api.spotify.com/v1/search?q=${artist} ${track}&type=track&limit=1`, {
-      'method': 'GET',
-      'headers': {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + accessToken(),
-      }
-    });
-
-    return { uri: res.data.tracks.items[0].uri };
-    // return res.data.tracks.items[0].uri;
 
   } catch (error) {
     console.log(error.message);

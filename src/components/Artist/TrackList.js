@@ -4,7 +4,12 @@ import classes from './TrackList.module.css';
 import Container from '../UI/Container';
 import Track from './Track';
 
-const TrackList = ({ tracks }) => {
+const TrackList = ({ tracks, onPlayer }) => {
+
+  const trackHandler = (track) => {
+    onPlayer(track);
+  }
+
   return (
     <Container>
       <section className={classes.tracks}>
@@ -15,6 +20,7 @@ const TrackList = ({ tracks }) => {
             <Track
               key={shortid.generate()}
               data={track}
+              onTrack={trackHandler}
             />
           )}
       </section>

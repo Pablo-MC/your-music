@@ -32,11 +32,8 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Home} />
-
             <Route path='/artist/:artist' component={Artist} />
-
             <Route path='/album/:album' component={Album} />
-
             <Route path='/explore'> </Route>
             <Route path='/library'> </Route>
           </Switch>

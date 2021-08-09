@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
-import { getTopArtists, getTopAlbums } from '../lib/api';
+import { getTopArtists, getTopAlbums, getAccessToken } from '../lib/api';
 
 import Container from '../components/UI/Container';
 import Carousel from '../components/Layout/Carousel/Carousel';
@@ -16,13 +16,21 @@ const Home = () => {
       setAlbums(albumsData);
     }
     fetchData()
+
   }, []);
 
-  // Obtener y almacenar el token (access_token) DE LA URL en localStorage para poder usar el reproductor de Spotify.
-  const url = window.location.hash;
-  const tokenPlayer = url.slice(url.indexOf('=') + 1, url.indexOf('&'));
-  localStorage.setItem('token', tokenPlayer);
+  setTimeout(async () => {
+    if (localStorage.getItem('accessToken') === null) {
+      // Almacenar el valor de 'access_token' (query string) de la URL en localStorage para usar el reproductor de Spotify.
+      const url = window.location.hash;
+      const playerToken = url.slice(url.indexOf('=') + 1, url.indexOf('&'));
+      localStorage.setItem('playerToken', playerToken);
 
+      // Almacenar el token en localStorage para realizar las solicitudes a la API de Spotify.
+      localStorage.setItem('accessToken', await getAccessToken());
+      console.log('lo guarde!');
+    }
+  }, 3000);
 
   return (
     <main>

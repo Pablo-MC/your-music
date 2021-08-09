@@ -6,11 +6,18 @@
   font-size: 1.6rem;
   font-weight: 500;
   padding: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
   border-bottom: 1px solid rgb(39, 38, 38);  
 }
 
 .track:last-child {
   border-bottom: none;
+}
+
+.track:hover {
+  background-color: aqua;
+
 }
 
 .track img {
