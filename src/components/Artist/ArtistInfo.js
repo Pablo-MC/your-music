@@ -1,8 +1,8 @@
-import classes from './MainInfo.module.css';
+import classes from './ArtistInfo.module.css';
 
 import Container from '../UI/Container';
 
-const MainInfo = (props) => {
+const ArtistInfo = (props) => {
 
   // Aplicar filtro en la request para TODAS las propiedades en caso de que no existan!. (.name, .biography, .listeners, .imgBackURL)
   const { artist, biography, listeners, imgBackURL } = props.info;
@@ -57,4 +57,4 @@ const MainInfo = (props) => {
   );
 }
 
-export default MainInfo;
+export default ArtistInfo;

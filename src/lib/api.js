@@ -32,10 +32,10 @@ export const getTopArtists = async function () {
 
     return artistsData
       .filter(item => item.artists !== null)
-      .flatMap(i => [{
-        artist: i.artists[0].strArtist, // nombre artista
-        imgURL: i.artists[0].strArtistThumb,
-        subscribers: new Intl.NumberFormat('es-AR').format(+i.artists[0].idArtist) + ' suscriptores', // Número de subscriptores ficticio.  
+      .flatMap(item => [{
+        artist: item.artists[0].strArtist, // nombre artista
+        imgURL: item.artists[0].strArtistThumb,
+        subscribers: new Intl.NumberFormat('es-AR').format(+item.artists[0].idArtist) + ' suscriptores', // Número de subscriptores ficticio.  
       }]);
 
   } catch (error) {
@@ -94,6 +94,54 @@ export const getArtistData = async function (artist) {
 
   } catch (error) {
     console.error('No se encontró informacion sobre el artista', error.message);
+  }
+}
+
+export const getAlbumData = async function (artist, albumTitle) {
+  try {
+    const albumData = await fetch(`https://api.spotify.com/v1/search?q=${artist} ${albumTitle}&type=track&limit=1`, {
+      'method': 'GET',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    }).then(res => res.json());
+
+    const id_album = albumData.tracks.items[0].album.id;
+
+    const albumTracks = await fetch(`https://api.spotify.com/v1/albums/${id_album}/tracks?limit=50`, {
+      'method': 'GET',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    }).then(res => res.json());
+
+    const tracks = albumTracks.items
+      .flatMap(track => [
+        {
+          title: track.name,
+          trackNumber: track.track_number,
+          duration: track.duration_ms,
+          trackURI: track.uri,
+        }
+      ]);
+
+    const album = {
+      artist: albumData.tracks.items[0].artists[0].name,
+      title: albumData.tracks.items[0].album.name,
+      imgURL: albumData.tracks.items[0].album.images[0].url,
+      releaseDate: albumData.tracks.items[0].album.release_date.slice(0, 4), // Solamente el año.
+      totalTracks: albumData.tracks.items[0].album.total_tracks,
+      tracks: tracks,
+    }
+
+    return album;
+
+  } catch (error) {
+    console.log(error.message);
   }
 }
 

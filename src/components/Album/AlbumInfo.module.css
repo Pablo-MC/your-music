@@ -1,0 +1,53 @@
+.album {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+
+  margin-top: 5.6rem;
+  color: #fff;
+}
+
+.album img {
+  width: 26.4rem;
+  margin-right: 4.8rem;
+  border-radius: 0.3rem ;
+}
+
+.content h2 {
+  font-size: 3.4rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.6rem;
+}
+
+.content a, span, p  {
+  font-size: 1.6rem;
+  color: #aaa;
+  text-decoration: none;
+}
+
+.content a:hover {
+  text-decoration: underline;
+}
+
+.content p {
+  margin: 0.4rem 0 4rem;
+}
+
+.content button {
+  font-family: 'Roboto', sans-serif;
+  margin-right: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: .2rem;
+  border: none;  
+}
+
+/* 2do boton */
+.content button:last-child {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: transparent;
+  border: .1rem solid rgba(255, 255, 255, 0.7);
+}

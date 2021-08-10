@@ -1,10 +1,10 @@
-import { useState, useEffect, Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { getArtistData } from '../lib/api';
 
-import MainInfo from '../components/Artist/MainInfo';
+import ArtistInfo from '../components/Artist/ArtistInfo';
+import ArtistAlbums from '../components/Artist/ArtistAlbums';
 import TrackList from '../components/Artist/TrackList';
-import AlbumList from '../components/Artist/AlbumList';
 import Player from '../components/Player/Player';
 
 const Artist = () => {
@@ -25,18 +25,18 @@ const Artist = () => {
     setTrack(track);
   }
 
-  console.log(artist.tracks);
+  // console.log(artist.tracks);
 
   return (
     <Fragment>
       {Object.entries(artist || {}).length !== 0 &&
         <>
-          <MainInfo info={artist} />
+          <ArtistInfo info={artist} />
           <TrackList tracks={artist.tracks} onPlayer={playerHandler} />
 
           <Player track={track} />
 
-          <AlbumList albums={artist.albums} />
+          <ArtistAlbums albums={artist.albums} />
         </>
       }
     </Fragment>

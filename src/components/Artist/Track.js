@@ -11,7 +11,6 @@ const Track = (props) => {
   }
 
   const playTrackHandler = (track) => {
-    // console.log('Hice click en la canción');
     props.onTrack(track);
   }
 

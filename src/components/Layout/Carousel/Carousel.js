@@ -28,13 +28,13 @@ const Carousel = ({ title, items, category }) => {
     }
   };
 
-  const categoryHandler = (category, name) => {
+  const categoryHandler = (category, artist, album) => {
     switch (category) {
       case 'artists':
-        history.push(`/artist/${name}`);
+        history.push(`/artist/${artist}`);
         break;
       case 'albums':
-        history.push(`/album/${name}`);
+        history.push(`/artist/${artist}/${album}`);
         break;
       default:
         history.push('/');
@@ -72,7 +72,8 @@ const Carousel = ({ title, items, category }) => {
               src={item.imgURL}
               alt={item.artist || item.album}
               className={classes[`${category}`]}
-              onClick={(e) => categoryHandler(category, e.target.alt)}
+              // onClick={(e) => categoryHandler(category, e.target.alt)}
+              onClick={() => categoryHandler(category, item.artist, item.album)}
             />
             <h4>{category === 'artists' ? item.artist : item.album}</h4>
             <p>{item.subscribers || item.artist || null}</p>
