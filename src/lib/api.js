@@ -122,7 +122,8 @@ export const getAlbumData = async function (artist, albumTitle) {
     const tracks = albumTracks.items
       .flatMap(track => [
         {
-          title: track.name,
+          type: 'album',
+          trackTitle: track.name,
           trackNumber: track.track_number,
           duration: track.duration_ms,
           trackURI: track.uri,
@@ -135,6 +136,7 @@ export const getAlbumData = async function (artist, albumTitle) {
       imgURL: albumData.tracks.items[0].album.images[0].url,
       releaseDate: albumData.tracks.items[0].album.release_date.slice(0, 4), // Solamente el año.
       totalTracks: albumData.tracks.items[0].album.total_tracks,
+      albumURI: albumData.tracks.items[0].album.uri,
       tracks: tracks,
     }
 
@@ -166,50 +168,88 @@ const getRandomTopArtist = async function () {
   }
 }
 
-// Retorna un array de objetos con la informacion de las 10 mejores canciones de un artista:
-const getTopTenTracks = async function (artist) {
+
+// Retorna el id del Artista.
+const getArtistId = async function (artist) {
   try {
-    const topTenTracksList = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json&limit=10`); // ['trackName', 'trackName', ...]
+    const artistId = await fetch(`https://api.spotify.com/v1/search?q=${artist}&type=artist&limit=1`, {
+      'method': 'GET',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    }).then(res => res.json());
 
-    const tracksPromise = topTenTracksList.data.toptracks.track
-      .map(track => fetch(`https://api.spotify.com/v1/search?q=${artist} ${track.name}&type=track&limit=1`, {
-        'method': 'GET',
-        'headers': {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-        }
-      }).then(res => res.json())); // [Promise, Promise, ...]
+    // OBS: ademas del id tambien te da: cantidad de seguidores, tipos de genero, imagenes (NO muy buenas).
 
-    const tracks = (await Promise.all(tracksPromise))
-      .flatMap(track => [
-        {
-          artist: track.tracks.items[0].artists[0].name,
-          album: track.tracks.items[0].album.name,
-          imgAlbumURL: track.tracks.items[0].album.images[2].url,
-          trackTitle: track.tracks.items[0].name,
-          trackURI: track.tracks.items[0].uri,
-          duration: track.tracks.items[0].duration_ms,
-        }
-      ])
-
-    return tracks; // [{track}, {track}, ...]
+    return artistId.artists.items[0].id;
 
   } catch (error) {
     console.log(error.message);
   }
 }
 
-// Retorna un array de objetos con la informacion de los 10 mejores albumes de un artista:
+// Retorna las 10 mejores canciones de un Artista.
+const getTopTenTracks = async function (artist) {
+  try {
+    const idArtist = await getArtistId(artist);
+
+    const topTracks = await fetch(`https://api.spotify.com/v1/artists/${idArtist}/top-tracks?market=US`, {
+      'method': 'GET',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    }).then(res => res.json());
+
+    return topTracks.tracks.flatMap(track => [
+      {
+        type: 'track',
+        artist: track.artists[0].name,
+        album: track.album.name,
+        imgAlbumURL: track.album.images[2].url,
+        trackTitle: track.name,
+        trackURI: track.uri,
+        duration: track.duration_ms,
+      }
+    ]);
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+// Retorna 10 albumes de un Artista.
 const getTopTenAlbums = async function (artist) {
   try {
-    const topTenAlbumsList = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json&limit=10`);
+    const artistId = await getArtistId(artist);
 
-    const albumsData = topTenAlbumsList.data.topalbums.album
-      .flatMap(album => [{ album: album.name, imgURL: album.image[3]['#text'] }])
-      .filter(album => album.imgURL !== '');
+    const albums = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?market=US&limit=30`, {
+      'method': 'GET',
+      'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+      }
+    }).then(res => res.json());
 
-    return albumsData;
+    return albums.items
+      .filter(album => album.album_type === 'album')
+      .sort(() => Math.random() - 0.5) // Ordenar aleatoriamente los elementos de un array.
+      .slice(0, 10)
+      .flatMap(album => [
+        {
+          // artist: album.artists[0].name,
+          // idAlbum: album.id,
+          album: album.name,
+          imgURL: album.images[0].url,
+          releaseDate: album.release_date,
+          totalTracks: album.total_tracks,
+          albumURI: album.uri,
+        }
+      ]);
 
   } catch (error) {
     console.log(error.message);

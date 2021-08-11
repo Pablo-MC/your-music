@@ -2,7 +2,7 @@ import classes from './Track.module.css';
 
 const Track = (props) => {
 
-  const { artist, album, imgAlbumURL, trackTitle, trackURI, duration } = props.data;
+  const { type, artist, album, imgAlbumURL, trackTitle, trackURI, duration, trackNumber } = props.data;
 
   const millisecToMinAndSec = function (millisec) {
     const min = Math.floor(millisec / 60000);
@@ -16,8 +16,8 @@ const Track = (props) => {
 
   return (
     <div className={classes.track} onClick={() => playTrackHandler(trackURI)}>
-      <div className={classes['content-track']}>
-        <img src={imgAlbumURL} alt={trackTitle} />
+      <div className={classes.content}>
+        {type === 'track' ? <img src={imgAlbumURL} alt={trackTitle} /> : <span style={{ marginRight: '3rem' }}>{trackNumber}</span>}
         <span>{trackTitle}</span>
       </div>
       <p>{artist}</p>

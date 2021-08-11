@@ -17,7 +17,6 @@
 
 .track:hover {
   background-color: aqua;
-
 }
 
 .track img {
@@ -26,11 +25,11 @@
   margin-right: 2rem;  
 }
 
-.content-track {
+.content {
   display: flex;
   align-items: center;
   color: #fff;
-  flex: 1 0 18%;
+  flex: 1 0 20%;
 
   /* justify-content: center; */
   

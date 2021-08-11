@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import shortid from 'shortid';
 import SliderCarousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
@@ -7,8 +7,7 @@ import classes from './Carousel.module.css';
 
 const Carousel = ({ title, items, category }) => {
   const history = useHistory();
-
-  // const { title, items, category } = props;
+  const params = useParams();
 
   const responsive = {
     desktop: {
@@ -28,7 +27,7 @@ const Carousel = ({ title, items, category }) => {
     }
   };
 
-  const categoryHandler = (category, artist, album) => {
+  const categoryHandler = (category, artist = params.artist, album) => {
     switch (category) {
       case 'artists':
         history.push(`/artist/${artist}`);
@@ -72,7 +71,6 @@ const Carousel = ({ title, items, category }) => {
               src={item.imgURL}
               alt={item.artist || item.album}
               className={classes[`${category}`]}
-              // onClick={(e) => categoryHandler(category, e.target.alt)}
               onClick={() => categoryHandler(category, item.artist, item.album)}
             />
             <h4>{category === 'artists' ? item.artist : item.album}</h4>

@@ -5,7 +5,11 @@ import Container from '../UI/Container';
 
 const AlbumInfo = (props) => {
 
-  const { artist, title, totalTracks, releaseDate, imgURL } = props.info;
+  const { artist, title, totalTracks, releaseDate, imgURL, albumURI } = props.info;
+
+  const playAlbumHandler = (album) => {
+    props.onPlayAlbum(album);
+  }
 
   return (
     <Container>
@@ -15,7 +19,7 @@ const AlbumInfo = (props) => {
           <h2>{title}</h2>
           <Link to={`/artist/${artist}`}>{artist}</Link> <span>{`• ${releaseDate}`}</span>
           <p>{`${totalTracks}  canciones`}</p>
-          <button>Reproducir</button>
+          <button onClick={() => playAlbumHandler(albumURI)}>Reproducir</button>
           <button>Quitar de la Biblioteca</button>
         </div>
       </div>

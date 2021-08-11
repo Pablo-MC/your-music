@@ -3,11 +3,15 @@ import { useParams } from 'react-router';
 import { getAlbumData } from '../lib/api';
 
 import AlbumInfo from '../components/Album/AlbumInfo';
+import TrackList from '../components/Artist/TrackList';
 
 const Album = () => {
   const params = useParams();
-
   const [album, setAlbum] = useState({})
+
+  const playAlbumHandler = (album) => {
+    // Averiguar como reproducir un album completo.
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -17,12 +21,15 @@ const Album = () => {
     fetchData();
   }, [params.artist, params.album]);
 
-  console.log(album);
 
   return (
     <Fragment>
-      <AlbumInfo info={album} />
-
+      {Object.entries(album || {}).length !== 0 &&
+        <>
+          <AlbumInfo info={album} onPlayAlbum={playAlbumHandler} />
+          <TrackList tracks={album.tracks} />
+        </>
+      }
     </Fragment>
   );
 }

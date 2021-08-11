@@ -1,21 +1,22 @@
+import { useState } from 'react';
 import shortid from 'shortid';
 import classes from './TrackList.module.css';
-
-import Container from '../UI/Container';
 import Track from './Track';
+import Player from '../Player/Player';
+import Container from '../UI/Container';
 
-const TrackList = ({ tracks, onPlayer }) => {
+const TrackList = ({ tracks }) => {
+  const [track, setTrack] = useState([])
 
   const trackHandler = (track) => {
-    onPlayer(track);
+    setTrack(track);
   }
 
   return (
-    <Container>
-      <section className={classes.tracks}>
+    <section className={classes.tracks}>
+      <Container>
         <h2>Canciones</h2>
         {tracks
-          // .filter(track => !track.error)
           .map(track =>
             <Track
               key={shortid.generate()}
@@ -23,8 +24,9 @@ const TrackList = ({ tracks, onPlayer }) => {
               onTrack={trackHandler}
             />
           )}
-      </section>
-    </Container>
+      </Container>
+      <Player track={track} />
+    </section>
   );
 }
 
