@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { getAlbumData } from '../lib/api';
 
 import AlbumInfo from '../components/Album/AlbumInfo';
-import TrackList from '../components/Artist/TrackList';
+import TrackList from '../components/Track/TrackList';
 
 const Album = () => {
   const params = useParams();

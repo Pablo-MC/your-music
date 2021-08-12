@@ -4,7 +4,7 @@ import { getArtistData } from '../lib/api';
 
 import ArtistInfo from '../components/Artist/ArtistInfo';
 import ArtistAlbums from '../components/Artist/ArtistAlbums';
-import TrackList from '../components/Artist/TrackList';
+import TrackList from '../components/Track/TrackList';
 
 const Artist = () => {
   const params = useParams();

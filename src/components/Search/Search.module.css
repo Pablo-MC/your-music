@@ -1,0 +1,45 @@
+.form {
+  position: absolute;
+  animation: slide-down 500ms ease-out forwards;
+  
+  /* TIENE QUE SER FIXED AL IGUAL QUE LA NAVBAR!- FALTA IMPLEMENTAR!. */
+  /* position: fixed; */ 
+}
+
+.form input {
+  width: 80rem;
+  height: 4.8vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 400;
+  border: 1px solid #333;
+  border-radius: .2rem;
+  padding-left: 1.5rem;
+  outline: none; 
+  color: #fff;  
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  /* overflow: hidden; */
+}
+
+.form input::placeholder { 
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* @media (min-width: 768px) {
+  .form {
+    width: 40rem;
+    left: calc(50% - 20rem);
+  }
+} */

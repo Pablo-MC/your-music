@@ -13,6 +13,7 @@
 
 .track:last-child {
   border-bottom: none;
+  margin-bottom: 0.3rem;
 }
 
 .track:hover {

@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+// Parámetros rqueridos para cada solicitud GET a la API de Spotify. 
+const parameters = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+  }
+}
+
 // Obtener el token de acceso para hacer las solicitudes a la API de Spotify. OBS: expira en 1hr
 // Client Credentials Flow: https://developer.spotify.com/documentation/general/guides/authorization-guide/
 export const getAccessToken = async function () {
@@ -14,6 +24,7 @@ export const getAccessToken = async function () {
     });
 
     const data = await res.json();
+
     return data.access_token;
 
   } catch (error) {
@@ -99,25 +110,22 @@ export const getArtistData = async function (artist) {
 
 export const getAlbumData = async function (artist, albumTitle) {
   try {
-    const albumData = await fetch(`https://api.spotify.com/v1/search?q=${artist} ${albumTitle}&type=track&limit=1`, {
-      'method': 'GET',
-      'headers': {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-      }
-    }).then(res => res.json());
+    const albumData = await fetch(`https://api.spotify.com/v1/search?q=${artist} ${albumTitle}&type=track&limit=1`, parameters).then(res => res.json());
 
     const id_album = albumData.tracks.items[0].album.id;
 
-    const albumTracks = await fetch(`https://api.spotify.com/v1/albums/${id_album}/tracks?limit=50`, {
-      'method': 'GET',
-      'headers': {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-      }
-    }).then(res => res.json());
+    const albumTracks = await fetch(`https://api.spotify.com/v1/albums/${id_album}/tracks?limit=50`, parameters).then(res => res.json());
+
+    // const tracks = albumTracks.items
+    //   .map(track => {
+    //     return {
+    //       type: 'album',
+    //       trackTitle: track.name,
+    //       trackNumber: track.track_number,
+    //       duration: track.duration_ms,
+    //       trackURI: track.uri,
+    //     }
+    //   });
 
     const tracks = albumTracks.items
       .flatMap(track => [
@@ -147,7 +155,7 @@ export const getAlbumData = async function (artist, albumTitle) {
   }
 }
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 // Retorna un array con el nombre (string) de 15 artistas Top aleatorios.
 const getRandomTopArtist = async function () {
@@ -169,19 +177,10 @@ const getRandomTopArtist = async function () {
 }
 
 
-// Retorna el id del Artista.
+// Retorna el id del Artista. OBS: Tambien posee: CANTIDAD DE SEGUIDORES, tipos de genero musicales, imagenes (NO muy buenas), etc.
 const getArtistId = async function (artist) {
   try {
-    const artistId = await fetch(`https://api.spotify.com/v1/search?q=${artist}&type=artist&limit=1`, {
-      'method': 'GET',
-      'headers': {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-      }
-    }).then(res => res.json());
-
-    // OBS: ademas del id tambien te da: cantidad de seguidores, tipos de genero, imagenes (NO muy buenas).
+    const artistId = await fetch(`https://api.spotify.com/v1/search?q=${artist}&type=artist&limit=1`, parameters).then(res => res.json());
 
     return artistId.artists.items[0].id;
 
@@ -195,14 +194,7 @@ const getTopTenTracks = async function (artist) {
   try {
     const idArtist = await getArtistId(artist);
 
-    const topTracks = await fetch(`https://api.spotify.com/v1/artists/${idArtist}/top-tracks?market=US`, {
-      'method': 'GET',
-      'headers': {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-      }
-    }).then(res => res.json());
+    const topTracks = await fetch(`https://api.spotify.com/v1/artists/${idArtist}/top-tracks?market=US`, parameters).then(res => res.json());
 
     return topTracks.tracks.flatMap(track => [
       {
@@ -226,14 +218,9 @@ const getTopTenAlbums = async function (artist) {
   try {
     const artistId = await getArtistId(artist);
 
-    const albums = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?market=US&limit=30`, {
-      'method': 'GET',
-      'headers': {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-      }
-    }).then(res => res.json());
+    const albums = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?market=US&limit=30`, parameters).then(res => res.json());
+
+    let hash = {};
 
     return albums.items
       .filter(album => album.album_type === 'album')
@@ -249,9 +236,25 @@ const getTopTenAlbums = async function (artist) {
           totalTracks: album.total_tracks,
           albumURI: album.uri,
         }
-      ]);
+      ])
+      .filter(element => hash[element.album] ? false : hash[element.album] = true); // Elimina objetos duplicados que poseen el mismo valor de la propiedad album. 
 
   } catch (error) {
     console.log(error.message);
   }
 }
+
+// export const getSearchArtist = async function (artist) {
+//   try {
+//     const artistId = await getArtistId(artist);
+
+//     const res = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, parameters).then(res => res.json());
+
+//     // console.log(res.name);
+
+//     return res.name
+
+//   } catch (error) {
+//     console.log('Entre aca!', error.message);
+//   }
+// }
