@@ -15,7 +15,7 @@ const Track = (props) => {
   }
 
   return (
-    <div className={classes.track} onClick={() => playTrackHandler(trackURI)}>
+    <div className={classes[`${type}`]} onClick={() => playTrackHandler(trackURI)}>
       <div className={classes.content}>
         {type === 'track' ? <img src={imgAlbumURL} alt={trackTitle} /> : <span style={{ marginRight: '3rem' }}>{trackNumber}</span>}
         <span>{trackTitle}</span>

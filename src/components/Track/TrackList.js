@@ -15,7 +15,7 @@ const TrackList = ({ tracks }) => {
   return (
     <section className={classes.tracks}>
       <Container>
-        <h2>Canciones</h2>
+        {tracks[0].type === 'track' ? <h2>Canciones</h2> : null}
         {tracks
           .map(track =>
             <Track

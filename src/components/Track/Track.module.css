@@ -1,4 +1,4 @@
-.track {
+.track, .album {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,17 +7,19 @@
   font-weight: 500;
   padding: 1rem;
   cursor: pointer;
-  border-radius: 1rem;
   border-bottom: 1px solid rgb(39, 38, 38);  
 }
 
-.track:last-child {
+.track:last-child,
+.album:last-child {
   border-bottom: none;
   margin-bottom: 0.3rem;
 }
 
-.track:hover {
+.track:hover,
+.album:hover {
   background-color: aqua;
+  border-radius: 1rem;
 }
 
 .track img {
@@ -55,5 +57,26 @@
 
 .track p:last-of-type {
   text-align: end;
-  margin-left: 0;
+}
+
+.album {
+  padding: 2rem 0;
+}
+
+.album span {
+  margin-left: 1.8rem;
+  color:#fff;
+}
+
+.album span:first-child {
+  flex: 0 0 2%;
+  text-align: center;
+}
+
+.album span:last-child {
+  margin-left: .2rem;
+}
+
+.album p {
+  margin-right: 1.5rem;
 }
