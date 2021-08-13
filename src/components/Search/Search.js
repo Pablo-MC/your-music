@@ -27,6 +27,7 @@ const Search = (props) => {
           autoFocus
           onChange={(e) => setArtist(e.target.value)}
         />
+        <div className={classes.close} onClick={() => props.onClosedSearch()}>X</div>
       </form>
     </Fragment>
   );
