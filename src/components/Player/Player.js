@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import SpotifyPlayer from 'react-spotify-web-playback'
 
-import Container from '../UI/Container';
+import classes from './Player.module.css';
 
 const Player = (props) => {
   const [play, setPlay] = useState(false)
@@ -11,7 +11,7 @@ const Player = (props) => {
   }, [props.track])
 
   return (
-    <Container>
+    <div className={classes.player}>
       <SpotifyPlayer
         token={localStorage.getItem('playerToken')}
         // uris={track.uri ? [track.uri] : []}
@@ -28,27 +28,30 @@ const Player = (props) => {
 
         styles={{
           activeColor: '#fff',
-          bgColor: '#333',
+          bgColor: '#212121',
           color: '#fff',
           loaderColor: '#fff',
-          sliderColor: '#1cb954',
+          sliderColor: '#ff0000',
           trackArtistColor: '#ccc',
           trackNameColor: '#fff',
+          sliderTrackColor: '#909090',
+          sliderHandleColor: '#ff0000',
+          height: '7rem',
+          // altColor: ,
+          // sliderHeight: ,
         }}
+      // styles={{
+      //   activeColor: '#fff',
+      //   bgColor: '#333',
+      //   color: '#fff',
+      //   loaderColor: '#fff',
+      //   sliderColor: '#1cb954',
+      //   trackArtistColor: '#ccc',
+      //   trackNameColor: '#fff',
+      // }}
       />
-    </Container>
+    </div>
   );
 }
 
 export default Player;
-
-
-
-
-
-
-
-
-
-
-
