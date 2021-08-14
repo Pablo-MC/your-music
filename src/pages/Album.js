@@ -4,10 +4,13 @@ import { getAlbumData } from '../lib/api';
 
 import AlbumInfo from '../components/Album/AlbumInfo';
 import TrackList from '../components/Track/TrackList';
+import Spinner from '../components/UI/Spinner';
 
 const Album = () => {
   const params = useParams();
   const [album, setAlbum] = useState({})
+  const [spinner, setSpinner] = useState(true);
+
 
   const playAlbumHandler = (album) => {
     // Averiguar como reproducir un album completo.
@@ -19,12 +22,16 @@ const Album = () => {
       setAlbum(albumData);
     }
     fetchData();
+
+    setTimeout(() => {
+      setSpinner(false);
+    }, 2000);
   }, [params.artist, params.album]);
 
 
   return (
     <Fragment>
-      {Object.entries(album || {}).length !== 0 &&
+      {spinner ? <Spinner /> : Object.entries(album || {}).length !== 0 &&
         <>
           <AlbumInfo info={album} onPlayAlbum={playAlbumHandler} />
           <TrackList tracks={album.tracks} />

@@ -1,22 +1,24 @@
-import { useState, useEffect, Fragment } from 'react';
-import { getTopArtists, getTopAlbums, getAccessToken } from '../lib/api';
+import { useState, useEffect } from 'react';
+import { getAccessToken, getHomeData } from '../lib/api';
 
 import Container from '../components/UI/Container';
+import Spinner from '../components/UI/Spinner';
 import Carousel from '../components/Layout/Carousel/Carousel';
 
 const Home = () => {
-  const [artists, setArtists] = useState([]);
-  const [albums, setAlbums] = useState([]);
+  const [data, setData] = useState({});
+  const [spinner, setSpinner] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-      const artistsData = await getTopArtists();
-      const albumsData = await getTopAlbums();
-      setArtists(artistsData);
-      setAlbums(albumsData);
+      const data = await getHomeData();
+      setData(data);
     }
-    fetchData()
+    fetchData();
 
+    setTimeout(() => {
+      setSpinner(false);
+    }, 2500);
   }, []);
 
   setTimeout(async () => {
@@ -25,35 +27,33 @@ const Home = () => {
       const url = window.location.hash;
       const playerToken = url.slice(url.indexOf('=') + 1, url.indexOf('&'));
       localStorage.setItem('playerToken', playerToken);
-
       // Almacenar el token en localStorage para realizar las solicitudes a la API de Spotify.
       localStorage.setItem('accessToken', await getAccessToken());
-      console.log('lo guarde!');
     }
   }, 3000);
 
+  console.log(data);
+
   return (
     <main>
-      <Container>
-        {artists.length !== 0 && albums.length !== 0 &&
-          <Fragment>
-            <Carousel
-              title='Artistas populares'
-              items={artists}
-              category='artists'
-            />
-            <Carousel
-              title='Tu música para el atardecer'
-              items={albums}
-              category='albums'
-            />
-            {/* <Category
+      {spinner ? <Spinner /> : Object.entries(data.albums || {}).length !== 0 &&
+        <Container>
+          <Carousel
+            title='Artistas populares'
+            items={data.artists}
+            category='artists'
+          />
+          <Carousel
+            title='Tu música para el atardecer'
+            items={data.albums}
+            category='albums'
+          />
+          {/* <Category
               title='Videos musicales recomendados'
               items={videos}
             /> */}
-          </Fragment>
-        }
-      </Container>
+        </Container>
+      }
     </main>
   );
 }
