@@ -6,27 +6,28 @@ import Player from '../Player/Player';
 import Container from '../UI/Container';
 
 const TrackList = ({ tracks }) => {
-  const [track, setTrack] = useState([])
+  const [track, setTrack] = useState([]);
+  const [playerIsShown, setPlayerIsShown] = useState(false);
 
   const trackHandler = (track) => {
     setTrack(track);
+    setPlayerIsShown(true);
   }
 
   return (
-    <section className={classes.tracks}>
+    <div className={classes.tracks}>
       <Container>
         {tracks[0].type === 'track' ? <h2>Canciones</h2> : null}
-        {tracks
-          .map(track =>
-            <Track
-              key={shortid.generate()}
-              data={track}
-              onTrack={trackHandler}
-            />
-          )}
+        {tracks.map(track =>
+          <Track
+            key={shortid.generate()}
+            data={track}
+            onTrack={trackHandler}
+          />
+        )}
       </Container>
-      <Player track={track} />
-    </section>
+      {playerIsShown && <Player track={track} />}
+    </div>
   );
 }
 

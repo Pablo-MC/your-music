@@ -9,18 +9,6 @@ const Home = () => {
   const [data, setData] = useState({});
   const [spinner, setSpinner] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getHomeData();
-      setData(data);
-    }
-    fetchData();
-
-    setTimeout(() => {
-      setSpinner(false);
-    }, 2500);
-  }, []);
-
   setTimeout(async () => {
     if (localStorage.getItem('accessToken') === null) {
       // Almacenar el valor de 'access_token' (query string) de la URL en localStorage para usar el reproductor de Spotify.
@@ -30,13 +18,27 @@ const Home = () => {
       // Almacenar el token en localStorage para realizar las solicitudes a la API de Spotify.
       localStorage.setItem('accessToken', await getAccessToken());
     }
-  }, 3000);
+  }, 1000);
+
+  useEffect(() => {
+    setTimeout(() => {
+      async function fetchData() {
+        const data = await getHomeData();
+        setData(data);
+      }
+      fetchData();
+
+      setTimeout(() => {
+        setSpinner(false);
+      }, 2000);
+    }, 1500);
+  }, []);
 
   console.log(data);
 
   return (
     <main>
-      {spinner ? <Spinner /> : Object.entries(data.albums || {}).length !== 0 &&
+      {spinner ? <Spinner /> : (Object.keys(data.artists || {}).length !== 0 && Object.keys(data.albums || {}).length !== 0) &&
         <Container>
           <Carousel
             title='Artistas populares'
@@ -54,7 +56,7 @@ const Home = () => {
             /> */}
         </Container>
       }
-    </main>
+    </main >
   );
 }
 

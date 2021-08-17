@@ -14,6 +14,7 @@ const Artist = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setSpinner(true);
       const artistData = await getArtistData(params.artist);
       setArtist(artistData);
     }
@@ -22,16 +23,17 @@ const Artist = () => {
     setTimeout(() => {
       setSpinner(false);
     }, 2500);
+
   }, [params.artist]);
 
   return (
     <Fragment>
       {spinner ? <Spinner /> : Object.entries(artist || {}).length !== 0 &&
-        <>
+        <section style={{ marginBottom: '15rem' }}>
           <ArtistInfo info={artist} />
           <TrackList tracks={artist.tracks} />
           <ArtistAlbums albums={artist.albums} />
-        </>
+        </section>
       }
     </Fragment>
   );

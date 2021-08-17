@@ -11,9 +11,9 @@ const Album = () => {
   const [album, setAlbum] = useState({})
   const [spinner, setSpinner] = useState(true);
 
-
   const playAlbumHandler = (album) => {
     // Averiguar como reproducir un album completo.
+    console.log(album);
   }
 
   useEffect(() => {
@@ -28,14 +28,13 @@ const Album = () => {
     }, 2000);
   }, [params.artist, params.album]);
 
-
   return (
     <Fragment>
       {spinner ? <Spinner /> : Object.entries(album || {}).length !== 0 &&
-        <>
+        <section style={{ marginBottom: '15rem' }}>
           <AlbumInfo info={album} onPlayAlbum={playAlbumHandler} />
           <TrackList tracks={album.tracks} />
-        </>
+        </section>
       }
     </Fragment>
   );

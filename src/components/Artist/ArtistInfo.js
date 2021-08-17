@@ -4,43 +4,19 @@ import Container from '../UI/Container';
 
 const ArtistInfo = (props) => {
 
-  // Aplicar filtro en la request para TODAS las propiedades en caso de que no existan!. (.name, .biography, .listeners, .imgBackURL)
-  const { artist, biography, listeners, imgBackURL } = props.info;
+  const { artist, biography, followers, backgroundImg } = props.info;
 
   const background = {
-    backgroundImage: `url(${imgBackURL})`,
+    backgroundImage: `url(${backgroundImg})`,
     backgroundSize: 'cover',
     height: '60vh',
     boxShadow: 'inset 0 -22px 90px 100px #030303', // Averiguar cómo hacer para que no se vea el border-buttom.
-
-    // Seguir probando para ver cuál queda mejor!.
-
     // backgroundAttachment: 'fixed',
-    // backgroundSize: 'initial',
-    // backgroundSize: 'contain',
-    // backgroundSize: 'auto',
-    // backgroundPosition: 'center',
-    // backgroundPosition: 'top',
-    // backgroundRepeat: 'no-repeat',
-    // height: '100vh',
-    // height: '70vh',
-    // position: 'relative',
-    // boxShadow: 'inset 0 -22px 40px 48px #030303', // Averiguar cómo hacer para que no se vea el border-buttom.
     // opacity: '80%',
-    // marginTop: '10rem' // Probar!.
-
-    /*
-     backgroundImage: `linear-gradient(
-      to right bottom,
-      rgba(235, 151, 78, 0.35),
-      rgba(230, 125, 34, 0.35)
-    ),
-    url(${imgBackURL})`;
-    */
   };
 
   return (
-    <section style={background}>
+    <div style={background}>
       <Container>
         <div className={classes.content}>
           <h2>{artist}</h2>
@@ -49,11 +25,11 @@ const ArtistInfo = (props) => {
           <div>
             <button>Aleatorio</button>
             <button>Radio</button>
-            <button>Suscriptores {`${listeners}`}</button>
+            <button>{`Suscriptores 🎵 ${followers}`}</button>
           </div>
         </div>
       </Container>
-    </section>
+    </div>
   );
 }
 

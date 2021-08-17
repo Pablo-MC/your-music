@@ -18,8 +18,9 @@ const Player = (props) => {
 
         uris={props.track}
 
+        autoPlay
         initialVolume={0.5}
-        showSaveIcon
+        // showSaveIcon
 
         play={play}
         callback={state => {
@@ -40,15 +41,6 @@ const Player = (props) => {
           // altColor: ,
           // sliderHeight: ,
         }}
-      // styles={{
-      //   activeColor: '#fff',
-      //   bgColor: '#333',
-      //   color: '#fff',
-      //   loaderColor: '#fff',
-      //   sliderColor: '#1cb954',
-      //   trackArtistColor: '#ccc',
-      //   trackNameColor: '#fff',
-      // }}
       />
     </div>
   );

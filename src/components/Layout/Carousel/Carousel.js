@@ -1,5 +1,6 @@
 import { useHistory, useParams } from 'react-router';
 import shortid from 'shortid';
+
 import SliderCarousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 
@@ -53,7 +54,6 @@ const Carousel = ({ title, items, category }) => {
   //   );
   // }
 
-
   return (
     <section className={classes.carousel}>
       {title && <h2>{title}</h2>}
@@ -74,7 +74,7 @@ const Carousel = ({ title, items, category }) => {
               onClick={() => categoryHandler(category, item.artist, item.album)}
             />
             <h4>{category === 'artists' ? item.artist : item.album}</h4>
-            <p>{item.subscribers || item.artist || null}</p>
+            <p>{item.followers || item.artist || null}</p>
           </div>
         )}
       </SliderCarousel>
