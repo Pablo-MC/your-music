@@ -10,13 +10,13 @@ const Home = () => {
   const [spinner, setSpinner] = useState(true);
 
   setTimeout(async () => {
-    if (localStorage.getItem('accessToken') === null) {
-      // Almacenar el valor de 'access_token' (query string) de la URL en localStorage para usar el reproductor de Spotify.
+    if (sessionStorage.getItem('accessToken') === null) {
+      // Almacenar el valor de 'access_token' (query string) de la URL en sessionStorage para usar el reproductor de Spotify.
       const url = window.location.hash;
       const playerToken = url.slice(url.indexOf('=') + 1, url.indexOf('&'));
-      localStorage.setItem('playerToken', playerToken);
-      // Almacenar el token en localStorage para realizar las solicitudes a la API de Spotify.
-      localStorage.setItem('accessToken', await getAccessToken());
+      sessionStorage.setItem('playerToken', playerToken);
+      // Almacenar el token en sessionStorage para realizar las solicitudes a la API de Spotify.
+      sessionStorage.setItem('accessToken', await getAccessToken());
     }
   }, 1000);
 
@@ -33,8 +33,6 @@ const Home = () => {
       }, 2000);
     }, 1500);
   }, []);
-
-  console.log(data);
 
   return (
     <main>

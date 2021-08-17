@@ -13,7 +13,7 @@ const Player = (props) => {
   return (
     <div className={classes.player}>
       <SpotifyPlayer
-        token={localStorage.getItem('playerToken')}
+        token={sessionStorage.getItem('playerToken')}
         // uris={track.uri ? [track.uri] : []}
 
         uris={props.track}

@@ -28,7 +28,7 @@ export const getSpotifyUser = async function () {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('playerToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('playerToken'),
       }
     });
 
@@ -64,7 +64,7 @@ export const getArtistData = async function (artist) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     });
 
@@ -106,7 +106,7 @@ export const getAlbumData = async function (artist, albumTitle) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     });
 
@@ -120,7 +120,7 @@ export const getAlbumData = async function (artist, albumTitle) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     });
 
@@ -162,7 +162,7 @@ const getRandomTopArtist = async function () {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     }); // [{artist}, {artist}, ...]
 
@@ -186,7 +186,7 @@ const getArtistId = async function (artist) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     });
 
@@ -206,7 +206,7 @@ const getTopTenTracks = async function (artist) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     }); // [{track}, {track}, ...]
 
@@ -238,7 +238,7 @@ const getAlbums = async function (artist) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     });
 
@@ -275,7 +275,7 @@ const getTopArtists = async function () {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     })); // [Promise, Promise, ...]
 
@@ -307,7 +307,7 @@ const getTopAlbums = async function () {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     })); // [Promise, Promise, ...]
 
@@ -318,7 +318,7 @@ const getTopAlbums = async function () {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     })); // [Promise, Promise, ...]
 
