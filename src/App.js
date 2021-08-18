@@ -28,7 +28,7 @@ function App() {
       {!isLoggedIn
         ? <Login onLogin={loginHandler} />
         :
-        <>
+        <main>
           <Navbar />
           <Switch>
             <Route exact path='/' component={Home} />
@@ -37,7 +37,7 @@ function App() {
             <Route path='/explore'> </Route>
             <Route path='/library'> </Route>
           </Switch>
-        </>
+        </main>
       }
     </Fragment>
   );

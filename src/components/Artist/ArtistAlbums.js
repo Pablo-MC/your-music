@@ -1,7 +1,6 @@
+import classes from './ArtistAlbums.module.css';
 import Container from '../UI/Container';
 import Carousel from '../Layout/Carousel/Carousel';
-
-import classes from './ArtistAlbums.module.css';
 
 const ArtistAlbums = ({ albums }) => {
   return (

@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
+    <section>
       {spinner ? <Spinner /> : (Object.keys(data.artists || {}).length !== 0 && Object.keys(data.albums || {}).length !== 0) &&
         <Container>
           <Carousel
@@ -54,7 +54,7 @@ const Home = () => {
             /> */}
         </Container>
       }
-    </main >
+    </section>
   );
 }
 

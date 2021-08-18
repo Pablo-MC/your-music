@@ -1,4 +1,7 @@
+import classes from './Login.module.css';
 import Container from '../UI/Container';
+
+import login from '../../assets/login.jpg';
 
 const Login = (props) => {
 
@@ -10,11 +13,15 @@ const Login = (props) => {
 
   return (
     <Container>
-      <p style={{ color: '#fff' }}>Para acceder a la aplicación debes acceder a tu cuenta premium de Spotify haciendo click en el siguiente boton</p>
-      <a
-        href={AUTH_URL}
-        onClick={() => props.onLogin()}
-      >Login Spotify</a>
+      <div className={classes.login}>
+        <img src={login} alt='Music Logo' />
+        <p>Para acceder a la aplicación debes ingresar a tu cuenta premium de Spotify haciendo click en el siguiente botón</p>
+        <a
+          href={AUTH_URL}
+          onClick={() => props.onLogin()}
+          className={classes.btn}
+        >Login Spotify</a>
+      </div>
     </Container>
   );
 }

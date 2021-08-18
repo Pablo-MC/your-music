@@ -18,8 +18,17 @@ body {
   background-color: #030303;
 }
 
+main {
+  animation: fadeInInit 7s;
+}
 
-/* Bar progress */
+@keyframes fadeInInit {
+  0% {opacity:0}
+  100% {opacity:1}
+}
+
+
+/* Color Spinner */
 
 /* #f00 */
 

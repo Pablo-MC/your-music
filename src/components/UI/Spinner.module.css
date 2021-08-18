@@ -3,6 +3,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  animation: fadeIn 3s;
 }
 
 .spinner > div {
@@ -40,4 +42,9 @@
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
+}
+
+@keyframes fadeIn {
+  0% {opacity:0}
+  100% {opacity:1}
 }

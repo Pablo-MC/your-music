@@ -2,8 +2,18 @@
   padding-top: 40rem;
   /* padding-top: 50rem; */
   color: #fff;
+}
 
-  /* height: 150vh; */
+/* Buscar cómo hacer para que no se vea el border-buttom y colocar el fadeIn a la imagen */
+.background {
+  height: 60vh;
+  background-size: cover;
+  box-shadow: inset 0 -22px 90px 100px #030303; 
+
+  /* backgroundAttachment: fixed, */
+  /* opacity: 80%, */
+
+  /* animation: fadeIn 5s, */
 }
 
 .content h2 {
@@ -44,3 +54,8 @@
   background-color: transparent;
   border: .1rem solid rgba(255, 255, 255, 0.7);
 }
+
+/* @keyframes fadeIn {
+  0% {opacity:0}
+  100% {opacity:1}
+} */
