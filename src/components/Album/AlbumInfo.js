@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 
 import Container from '../UI/Container';
 
+import play from '../../assets/play.svg';
+import library from '../../assets/library.svg';
+
 const AlbumInfo = (props) => {
 
-  const { artist, title, totalTracks, releaseDate, imgURL, albumURI } = props.info;
+  const { artist, title, totalTracks, releaseDate, imgURL } = props.info;
+  // const { artist, title, totalTracks, releaseDate, imgURL, albumURI } = props.info;
 
-  const playAlbumHandler = (album) => {
-    props.onPlayAlbum(album);
-  }
+  // const playAlbumHandler = (album) => {
+  //   props.onPlayAlbum(album);
+  // }
 
   return (
     <Container>
@@ -19,8 +23,9 @@ const AlbumInfo = (props) => {
           <h2>{title}</h2>
           <Link to={`/artist/${artist}`}>{artist}</Link> <span>{`• ${releaseDate}`}</span>
           <p>{`${totalTracks}  canciones`}</p>
-          <button onClick={() => playAlbumHandler(albumURI)}>Reproducir</button>
-          <button>Quitar de la Biblioteca</button>
+          <button><img src={play} alt='play' />Reproducir</button>
+          {/* <button onClick={() => playAlbumHandler(albumURI)}><img src={play} alt='play' />Reproducir</button> */}
+          <button><img src={library} alt='library' />Agregar a la Biblioteca</button>
         </div>
       </div>
     </Container>
