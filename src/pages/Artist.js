@@ -7,7 +7,7 @@ import ArtistAlbums from '../components/Artist/ArtistAlbums';
 import TrackList from '../components/Track/TrackList';
 import Spinner from '../components/UI/Spinner';
 
-const Artist = () => {
+const Artist = (props) => {
   const params = useParams();
   const [artist, setArtist] = useState({});
   const [spinner, setSpinner] = useState(true);
@@ -23,15 +23,18 @@ const Artist = () => {
     setTimeout(() => {
       setSpinner(false);
     }, 2500);
-
   }, [params.artist]);
+
+  const selectTrackHandler = (track) => {
+    props.onPlayTrack(track);
+  }
 
   return (
     <Fragment>
       {spinner ? <Spinner /> : Object.entries(artist || {}).length !== 0 &&
-        <section style={{ marginBottom: '15rem' }}>
+        <section style={{ marginBottom: '14rem' }}>
           <ArtistInfo info={artist} />
-          <TrackList tracks={artist.tracks} />
+          <TrackList tracks={artist.tracks} onSelectTrack={selectTrackHandler} />
           <ArtistAlbums albums={artist.albums} />
         </section>
       }

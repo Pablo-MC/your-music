@@ -13,14 +13,14 @@
 .track:last-child,
 .album:last-child {
   border-bottom: none;
-  margin-bottom: 0.3rem;
 }
 
 .track:hover,
 .album:hover {
-  background-color: aqua;
+  background-color: #212121;
+  /* background-color: aqua; */
   border-radius: 1rem;
-}
+ }
 
 .track img {
   width: 4vmin;

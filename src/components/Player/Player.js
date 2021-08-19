@@ -18,13 +18,14 @@ const Player = (props) => {
 
         uris={props.track}
 
-        autoPlay
         initialVolume={0.5}
-        // showSaveIcon
+        autoPlay={true}
 
         play={play}
+        // play={true}
+
         callback={state => {
-          if (!state.isPlaying) setPlay(false)
+          if (!state.isPlaying) setPlay(false);
         }}
 
         styles={{
@@ -41,6 +42,8 @@ const Player = (props) => {
           // altColor: ,
           // sliderHeight: ,
         }}
+
+      // offset={5}, Número de pista en las que desea iniciar el reproductor.
       />
     </div>
   );

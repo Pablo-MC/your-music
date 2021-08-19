@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
 
   return (
-    <section>
+    <section style={{ marginBottom: '14rem' }}>
       {spinner ? <Spinner /> : (Object.keys(data.artists || {}).length !== 0 && Object.keys(data.albums || {}).length !== 0) &&
         <Container>
           <Carousel
