@@ -1,13 +1,14 @@
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import classes from './Notification.module.css';
 
 const Notification = () => {
   const params = useParams();
+  const history = useHistory();
 
   return (
     <div className={classes.notification}>
       <h2>{params.msg}</h2>
-      <button onClick={() => window.history.back()}>◀ &#x2063; Regresar</button>
+      {params.msg !== 'Token expired...' && <button onClick={() => history.go(-2)}>◀ &#x2063; Regresar</button>}
       {/* <button onClick={() => closeCurrentWindow()}>Salir</button> */}
     </div>
   );

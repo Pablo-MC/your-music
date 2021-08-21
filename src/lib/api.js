@@ -17,7 +17,7 @@ export const getAccessToken = async function () {
     return data.access_token;
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getAccessToken: ', error.message);
   }
 }
 
@@ -52,7 +52,7 @@ export const getHomeData = async function () {
       albums: topAlbums,
     }
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getHomeData: ', error.message);
   }
 }
 
@@ -68,25 +68,23 @@ export const getArtistData = async function (artist) {
       }
     });
 
-    // Imágen de Fondo.
+    // Imágen de Fondo. OBS: Sino existe retorna null.
     const backgroundImg = await axios(`https://theaudiodb.com/api/v1/json/1/search.php?s=${artist}`);
 
-    // Biografía. // Buscar otra API que me traiga mejor biografía. 
-    const biography = await axios(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.REACT_APP_API_KEY}&format=json`);
-    // if (!biography.ok) throw new Error(`No se encontró la biografía del Artista. Error ${biography.status}`);
-
     const albumsData = await getAlbums(artist);
-
     const tracksData = await getTopTenTracks(artist);
 
-    const background = backgroundImg.data.artists !== null
+    artist = artist === 'Oasis' ? 'Oasis (banda)' : artist;
+    const biography = await axios(`https://es.wikipedia.org/api/rest_v1/page/summary/${artist}`);
+
+    const background = backgroundImg.data.artists !== null && backgroundImg.data.artists[0].strArtistFanart !== null
       ? backgroundImg.data.artists[0].strArtistFanart
       : info.data.artists.items[0].images[0].url;
 
     const artistData = {
       artist: info.data.artists.items[0].name,
       followers: new Intl.NumberFormat('es-AR').format(info.data.artists.items[0].followers.total),
-      biography: biography.data.artist.bio.summary,
+      biography: biography.data?.extract || null,
       backgroundImg: background,
       albums: albumsData, // []
       tracks: tracksData, // []
@@ -95,7 +93,7 @@ export const getArtistData = async function (artist) {
     return artistData;
 
   } catch (error) {
-    console.error('No se encontró informacion sobre el artista', error.message);
+    console.error('Error en getArtistaData', error.message);
   }
 }
 
@@ -109,10 +107,9 @@ export const getAlbumData = async function (artist, albumTitle) {
         'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken'),
       }
     });
+    if (album.data.tracks.items.length === 0) throw new Error('Album no disponible...');
 
-    if (album.data.tracks.items.length === 0) throw new Error('Album NO disponible');
-
-    // Busco el id del album para obtener los tracks.
+    // Obtener el id del album para obtener los tracks.
     const albumId = album.data.tracks.items[0].album.id;
 
     const albumTracks = await axios(`https://api.spotify.com/v1/albums/${albumId}/tracks?limit=50`, {
@@ -148,7 +145,7 @@ export const getAlbumData = async function (artist, albumTitle) {
     return albumData;
 
   } catch (error) {
-    console.error(error.message); // Album NO disponible
+    console.error('Error en getAlbumData', error.message);
   }
 }
 
@@ -175,7 +172,7 @@ const getRandomTopArtist = async function () {
       .filter(artist => !poorImgQuality.includes(artist));
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getRandomTopArtist: ', error.message);
   }
 }
 
@@ -190,10 +187,12 @@ const getArtistId = async function (artist) {
       }
     });
 
+    if (artistId.data.artists.items.length === 0) throw new Error('Artista no encontrado...');
+
     return artistId.data.artists.items[0].id;
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getArtistId', error.message);
   }
 }
 
@@ -224,7 +223,7 @@ const getTopTenTracks = async function (artist) {
       });
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getTopTenTracks: ', error.message);
   }
 }
 
@@ -262,7 +261,7 @@ const getAlbums = async function (artist) {
       .filter(element => hash[element.album] ? false : hash[element.album] = true); // Eliminar albumes duplicados. 
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getAlbums: ', error.message);
   }
 }
 
@@ -291,7 +290,7 @@ const getTopArtists = async function () {
       });
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getTopArtists: ', error.message);
   }
 }
 
@@ -334,28 +333,6 @@ const getTopAlbums = async function () {
       });
 
   } catch (error) {
-    console.error(error.message);
+    console.error('Error en getTopAlbums', error.message);
   }
 }
-
-// Retorna un array con el nombre (string) de 15 artistas Top aleatorios.
-// const getRandomTopArtist = async function () {
-//   try {
-//     // const page = Math.floor((Math.random() * (4 - 1 + 1)) + 1);
-//     const page = 2;
-
-//     const res = await axios(`http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=${process.env.REACT_APP_API_KEY}&format=json&page=${page}`);
-
-//     console.log(res.data.artists.artist);
-
-//     const artists = res.data.artists.artist
-//       .sort(() => Math.random() - 0.5) // Ordenar aleatoriamente los elementos de un array.
-//       .slice(0, 15)
-//       .map(artist => artist.name);
-
-//     return artists; // ["David Bowie", "Tyler, the Creator", "Eminem", ...]
-
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// }

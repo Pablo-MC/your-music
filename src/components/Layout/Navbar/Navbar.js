@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { getSpotifyUser } from '../../../lib/api';
-
 import classes from './Navbar.module.css';
 
 import logo from '../../../assets/logo.svg'

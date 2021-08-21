@@ -7,7 +7,6 @@ import play from '../../assets/play.svg';
 import library from '../../assets/library.svg';
 
 const AlbumInfo = (props) => {
-
   const { artist, title, totalTracks, releaseDate, imgURL } = props.info;
   // const { artist, title, totalTracks, releaseDate, imgURL, albumURI } = props.info;
 

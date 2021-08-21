@@ -1,7 +1,6 @@
 import classes from './Track.module.css';
 
 const Track = (props) => {
-
   const { type, artist, album, imgAlbumURL, trackTitle, trackURI, duration, trackNumber } = props.data;
 
   const millisecToMinAndSec = function (millisec) {

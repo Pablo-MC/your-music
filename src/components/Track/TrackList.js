@@ -1,5 +1,6 @@
-import shortid from 'shortid';
 import classes from './TrackList.module.css';
+import shortid from 'shortid';
+
 import Track from './Track';
 import Container from '../UI/Container';
 

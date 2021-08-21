@@ -10,9 +10,6 @@
   background-color: #333;
   
   animation: slide-down 400ms ease-out forwards;
-  
-  /* TIENE QUE SER FIXED AL IGUAL QUE LA NAVBAR!- FALTA IMPLEMENTAR!. */
-  /* position: fixed; */ 
 }
 
 .form input {
@@ -34,7 +31,9 @@
 .form .close {
   flex: 1 0 5%;
 
-  font-size: 2.3rem;
+  font-size: 2.7rem;
+  font-weight: 100;
+  padding: 0 .8rem .5rem 0;
   text-align: center;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.5);
@@ -43,10 +42,12 @@
 @keyframes slide-down {
   from {
     opacity: 0;
-    transform: translateY(-3rem);
+    /* transform: translateY(-3rem); */
+    transform: translateY(-1.5rem);
   }
   to {
     opacity: 1;
+    /* transform: translateY(0); */
     transform: translateY(0);
   }
 }

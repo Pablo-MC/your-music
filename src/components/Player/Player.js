@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import SpotifyPlayer from 'react-spotify-web-playback'
-
 import classes from './Player.module.css';
+import SpotifyPlayer from 'react-spotify-web-playback'
 
 const Player = (props) => {
   const [play, setPlay] = useState(false)
@@ -33,11 +32,11 @@ const Player = (props) => {
           bgColor: '#212121',
           color: '#fff',
           loaderColor: '#fff',
-          sliderColor: '#ff0000',
+          sliderColor: '#f00',
           trackArtistColor: '#ccc',
           trackNameColor: '#fff',
           sliderTrackColor: '#909090',
-          sliderHandleColor: '#ff0000',
+          sliderHandleColor: '#f00',
           height: '7rem',
           // altColor: ,
           // sliderHeight: ,

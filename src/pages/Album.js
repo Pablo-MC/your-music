@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { getAlbumData } from '../lib/api';
 
 import AlbumInfo from '../components/Album/AlbumInfo';
@@ -8,6 +8,7 @@ import Spinner from '../components/UI/Spinner';
 
 const Album = (props) => {
   const params = useParams();
+  const history = useHistory();
   const [album, setAlbum] = useState({})
   const [spinner, setSpinner] = useState(true);
 
@@ -19,6 +20,11 @@ const Album = (props) => {
   useEffect(() => {
     async function fetchData() {
       const albumData = await getAlbumData(params.artist, params.album);
+
+      !albumData
+        ? history.push('/notification/Album no disponible...')
+        : setAlbum(albumData);
+
       setAlbum(albumData);
     }
     fetchData();
@@ -26,7 +32,7 @@ const Album = (props) => {
     setTimeout(() => {
       setSpinner(false);
     }, 2000);
-  }, [params.artist, params.album]);
+  }, [params.artist, params.album, history]);
 
   const selectTrackHandler = (track) => {
     props.onPlayTrack(track);

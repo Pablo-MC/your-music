@@ -1,6 +1,4 @@
-// https://tobiasahlin.com/spinkit/
-
-import classes from './Spinner.module.css';
+import classes from './Spinner.module.css'; // https://tobiasahlin.com/spinkit/
 
 const Spinner = () => {
   return (

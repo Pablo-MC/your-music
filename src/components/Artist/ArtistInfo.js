@@ -6,7 +6,6 @@ import radio from '../../assets/radio.svg';
 import music from '../../assets/music.svg';
 
 const ArtistInfo = (props) => {
-
   const { artist, biography, followers, backgroundImg } = props.info;
 
   return (
@@ -19,8 +18,6 @@ const ArtistInfo = (props) => {
           <div>
             <button><img src={shuffle} alt='play' />Aleatorio</button>
             <button><img src={radio} alt='radio' />Radio</button>
-            {/* <button>{`Suscriptores ${followers}`}</button> */}
-            {/* <button>{`Suscriptores 🎵 ${followers}`}</button> */}
             <button>Suscriptores <img src={music} alt='radio' />{followers}</button>
           </div>
         </div>

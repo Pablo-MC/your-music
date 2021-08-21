@@ -8,6 +8,7 @@ import Album from './pages/Album';
 import Navbar from './components/Layout/Navbar/Navbar';
 import Login from './components/Login/Login';
 import Player from './components/Player/Player';
+import Notification from './components/UI/Notification.js';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,6 +50,11 @@ function App() {
 
             <Route path='/explore'> </Route>
             <Route path='/library'> </Route>
+
+            <Route path='/notification/:msg' component={Notification} />
+
+            {/* <Route path='*' component={NotFound} /> */}
+
           </Switch>
           {playerIsShown && <Player track={track} />}
         </main>

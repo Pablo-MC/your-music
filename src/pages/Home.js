@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { getAccessToken, getHomeData } from '../lib/api';
 
 import Container from '../components/UI/Container';
@@ -6,6 +7,7 @@ import Spinner from '../components/UI/Spinner';
 import Carousel from '../components/Layout/Carousel/Carousel';
 
 const Home = () => {
+  const history = useHistory();
   const [data, setData] = useState({});
   const [spinner, setSpinner] = useState(true);
 
@@ -17,6 +19,8 @@ const Home = () => {
       sessionStorage.setItem('playerToken', playerToken);
       // Almacenar el token en sessionStorage para realizar las solicitudes a la API de Spotify.
       sessionStorage.setItem('accessToken', await getAccessToken());
+      // Borrar el token de la URL.
+      window.location.hash = '';
     }
   }, 1000);
 
@@ -24,7 +28,10 @@ const Home = () => {
     setTimeout(() => {
       async function fetchData() {
         const data = await getHomeData();
-        setData(data);
+
+        Object.values(data).includes(undefined)
+          ? history.push('/notification/Token expired...')
+          : setData(data);
       }
       fetchData();
 
@@ -32,7 +39,7 @@ const Home = () => {
         setSpinner(false);
       }, 2000);
     }, 1500);
-  }, []);
+  }, [history]);
 
   return (
     <section style={{ marginBottom: '14rem' }}>

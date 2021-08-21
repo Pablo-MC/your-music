@@ -1,17 +1,24 @@
 import { Fragment, useState } from 'react';
 import { useHistory } from 'react-router';
-
 import classes from './Search.module.css';
 
 const Search = (props) => {
   const history = useHistory();
   const [artist, setArtist] = useState('');
 
+  const titleCase = artist => {
+    return artist
+      .split(' ')
+      .map(word => word[0].toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
 
-    history.push(`/artist/${artist}`)
+    if (!artist) return;
 
+    history.push(`/artist/${titleCase(artist)}`);
     props.onClosedSearch();
   }
 
@@ -23,11 +30,13 @@ const Search = (props) => {
       >
         <input
           type="text"
-          placeholder='Buscar'
+          placeholder='Buscar artista . . .'
           autoFocus
-          onChange={(e) => setArtist(e.target.value)}
+          // required
+          // onInvalid={(e) => e.target.setCustomValidity('Por favor ingrese el nombre de un artista!')}
+          onChange={(e) => setArtist(e.target.value = e.target.value.trimStart())}
         />
-        <div className={classes.close} onClick={() => props.onClosedSearch()}>X</div>
+        <div className={classes.close} onClick={() => props.onClosedSearch()}>✖</div>
       </form>
     </Fragment>
   );

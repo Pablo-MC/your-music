@@ -1,10 +1,8 @@
 import { useHistory, useParams } from 'react-router';
+import classes from './Carousel.module.css';
 import shortid from 'shortid';
-
 import SliderCarousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
-
-import classes from './Carousel.module.css';
 
 const Carousel = ({ title, items, category }) => {
   const history = useHistory();

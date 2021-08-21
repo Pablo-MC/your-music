@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { getArtistData } from '../lib/api';
 
 import ArtistInfo from '../components/Artist/ArtistInfo';
@@ -9,6 +9,7 @@ import Spinner from '../components/UI/Spinner';
 
 const Artist = (props) => {
   const params = useParams();
+  const history = useHistory();
   const [artist, setArtist] = useState({});
   const [spinner, setSpinner] = useState(true);
 
@@ -16,14 +17,17 @@ const Artist = (props) => {
     async function fetchData() {
       setSpinner(true);
       const artistData = await getArtistData(params.artist);
-      setArtist(artistData);
+
+      !artistData
+        ? history.push('/notification/Artista no encontrado...')
+        : setArtist(artistData);
     }
     fetchData();
 
     setTimeout(() => {
       setSpinner(false);
     }, 2500);
-  }, [params.artist]);
+  }, [params.artist, history]);
 
   const selectTrackHandler = (track) => {
     props.onPlayTrack(track);
