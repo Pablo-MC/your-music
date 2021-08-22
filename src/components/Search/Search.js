@@ -7,9 +7,12 @@ const Search = (props) => {
   const [artist, setArtist] = useState('');
 
   const titleCase = artist => {
+    const minorWords = ['el', 'la', 'de', 'del', 'los', 'the', 'a', 'and', 'of', 'in'];
     return artist
       .split(' ')
-      .map(word => word[0].toUpperCase() + word.slice(1))
+      .filter(str => str !== '')
+      .map(str => str.toLowerCase())
+      .map(str => minorWords.includes(str) ? str : str[0].toUpperCase() + str.slice(1))
       .join(' ');
   }
 
