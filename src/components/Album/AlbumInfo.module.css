@@ -57,3 +57,21 @@
   width: 1.7rem;
   margin-right: 1rem;
 }
+
+
+/************************/
+/*    Media Queries     */
+/************************/
+
+@media (max-width: 44em) { /* 704px (Small tablets) */
+  .album {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+  }
+  .album img {
+    margin: 0 auto;
+  }
+}

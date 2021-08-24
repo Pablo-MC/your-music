@@ -18,7 +18,6 @@
 .track:hover,
 .album:hover {
   background-color: #212121;
-  /* background-color: aqua; */
   border-radius: 1rem;
  }
 
@@ -33,14 +32,14 @@
   align-items: center;
   color: #fff;
   flex: 1 0 20%;
+} 
 
-  /* justify-content: center; */
-  
-  /* display: -webkit-box;
+.content span:last-child {
+  display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical; */
-} 
+  -webkit-box-orient: vertical;
+}
 
 .track p {
   flex: 1 0 10%;
@@ -79,4 +78,32 @@
 
 .album p {
   margin-right: 1.5rem;
+}
+
+
+/************************/
+/*    Media Queries     */
+/************************/
+
+@media (max-width: 59em) { /* 944px (Tablets) */
+
+   /* duration  */
+  .album p:last-of-type {
+    flex: 0 1 15%;
+    text-align: end;
+  }  
+}
+
+@media (max-width: 44em) { /* 704px (Smaller tablets) */
+
+  /* artist */
+  .track p:first-of-type {
+    display: none;
+  }
+
+  /* duration  */
+  .track p:last-of-type { 
+    margin-left: 0;
+    flex: 0 0 12%;
+  } 
 }

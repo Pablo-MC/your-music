@@ -1,5 +1,5 @@
 .albums {
-  padding-top: 10rem;
+  padding-top: 9rem;
   color: #fff;
 }
 
@@ -7,4 +7,15 @@
   font-size: 2.4rem;
   letter-spacing: -0.01em;
   padding-bottom: 3rem;
+}
+
+
+/************************/
+/*    Media Queries     */
+/************************/
+
+@media (max-width: 59em) { /* 944px (Tablets) */
+  .albums {
+    padding-top: 5rem;
+  }
 }

@@ -1,6 +1,5 @@
 .container {
-  width: 80%;
-  /* margin: 0 21.5rem; */
+  width: 82%;
   margin: 0 auto;
 
   animation: fadeIn 5s;
@@ -9,4 +8,15 @@
 @keyframes fadeIn {
   0% {opacity:0}
   100% {opacity:1}
+}
+
+
+/************************/
+/*    Media Queries     */
+/************************/
+
+@media (max-width: 44em) { /* 704px (Small tablets) */
+  .container {
+    width: 90%;
+  }
 }
