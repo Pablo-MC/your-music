@@ -19,7 +19,9 @@
 .album:hover {
   background-color: #212121;
   border-radius: 1rem;
- }
+  /* border-bottom: 1px solid green; */
+  /* border-bottom: 1px solid #55c57a; */
+}
 
 .track img {
   width: 4vmin;
@@ -92,6 +94,11 @@
     flex: 0 1 15%;
     text-align: end;
   }  
+
+  /* track number */
+  .album span:first-child {
+    flex: 0 0 2.5%;
+  }
 }
 
 @media (max-width: 44em) { /* 704px (Smaller tablets) */
@@ -105,7 +112,12 @@
   .track p:last-of-type { 
     margin-left: 0;
     flex: 0 0 12%;
-  } 
+  }
+  
+  /* track number */
+  .album span:first-child {
+    flex: 0 0 3%;
+  }
 }
 
 @media (max-width: 34em) { /* 544px (Phones) */
@@ -113,5 +125,10 @@
   /* album */
   .track p:nth-child(3) {
     display: none;
+  }
+
+  /* track number */
+  .album span:first-child {
+    flex: 0 0 5%;
   }
 }

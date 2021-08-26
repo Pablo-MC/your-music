@@ -71,4 +71,7 @@ main {
 @media (max-width: 44em) {}
 
 /* 544px (Phones) */
-@media (max-width: 34em) {}
+@media (max-width: 34em) {
+  .react-multiple-carousel__arrow--left{left:calc(-0.1% + 1px) !important; top:calc(22% + 1px) !important}
+  .react-multiple-carousel__arrow--right{right:calc(-0.1% + 1px) !important; top:calc(22% + 1px) !important}
+}

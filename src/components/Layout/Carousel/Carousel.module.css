@@ -56,3 +56,21 @@
     margin: 0 1.3rem;
   }    
 }
+
+@media (max-width: 44em) { /* 704px (Small tablets) */
+  .item h4 {    
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@media (max-width: 34em) { /* 544px (Phones) */
+  .carousel {
+    margin-bottom: 4rem;
+  }
+  .item {
+    margin: 0 1.3rem;
+  }
+}

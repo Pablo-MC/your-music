@@ -103,10 +103,6 @@
   .content {
     padding-top: 28rem;
   }
-  .background {
-    background-size: contain;
-    background-repeat: no-repeat;
-  } 
 }
 
 @media (max-width: 34em) { /* 544px (Phones) */

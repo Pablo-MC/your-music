@@ -83,7 +83,7 @@
 
 @media (max-width: 44em) { /* 704px (Small tablets) */
   .form {
-    width: 33rem;
+    width: 35rem;
   }
   .form input {
     flex: 1 0 92%;
@@ -92,5 +92,11 @@
     flex: 1 0 10%;
     font-size: 2rem;
     padding-right: 6rem;
+  }
+}
+
+@media (max-width: 34em) { /* 544px (Phones) */
+  .form {
+    width: 30rem;
   }
 }
