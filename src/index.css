@@ -28,28 +28,47 @@ main {
 }
 
 
-/* Carousel */
+/************************/
+/*   Carousel Arrows    */
+/************************/
 
-/* .react-multi-carousel-list{display:flex;align-items:center;overflow:hidden;position:relative}
+.react-multiple-carousel__arrow{background: #fff !important;min-width: 3.4rem !important;min-height:3.4rem !important;opacity:1;cursor:pointer; box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !important}
 
-.react-multi-carousel-track{list-style:none;padding:0;margin:0;display:flex;flex-direction:row;position:relative;transform-style:preserve-3d;backface-visibility:hidden;will-change:transform,transition}
+.react-multiple-carousel__arrow--left::before{content:"\e824" !important; color: #000 !important; font-weight: bold !important; font-size: 1.5rem !important; padding-right: 0.2rem !important}
+.react-multiple-carousel__arrow--right::before{content:"\e825" !important; color: #000 !important; font-weight: bold !important; font-size: 1.5rem !important; padding-left: 0.2rem !important}
 
-.react-multiple-carousel__arrow{position:absolute;outline:0;transition:all .5s;border-radius:35px;z-index:1000;border:0;background:rgba(0,0,0,0.5);min-width:43px;min-height:43px;opacity:1;cursor:pointer}
+.react-multiple-carousel__arrow--left{left:calc(0% + 1px) !important; top:calc(30% + 1px) !important}
+.react-multiple-carousel__arrow--right{right:calc(0% + 1px) !important; top:calc(30% + 1px) !important}
 
-.react-multiple-carousel__arrow:hover{background:rgba(0,0,0,0.8)}
-.react-multiple-carousel__arrow::before{font-size:20px;color:#fff;display:block;font-family:revicons;text-align:center;z-index:2;position:relative}
-.react-multiple-carousel__arrow:disabled{cursor:default;background:rgba(0,0,0,0.5)}
 
-.react-multiple-carousel__arrow--left{left:calc(4% + 1px)}
-.react-multiple-carousel__arrow--left::before{content:"\e824"}
-.react-multiple-carousel__arrow--right{right:calc(4% + 1px)}
-.react-multiple-carousel__arrow--right::before{content:"\e825"}
-.react-multi-carousel-dot-list{position:absolute;bottom:0;display:flex;left:0;right:0;justify-content:center;margin:auto;padding:0;margin:0;list-style:none;text-align:center}
+/************************/
+/*    Media Queries     */
+/************************/
 
-.react-multi-carousel-dot button{display:inline-block;width:12px;height:12px;border-radius:50%;opacity:1;padding:5px 5px 5px 5px;box-shadow:none;transition:background .5s;border-width:2px;border-style:solid;border-color:grey;padding:0;margin:0;margin-right:6px;outline:0;cursor:pointer}
-.react-multi-carousel-dot button:hover:active{background:#080808}
-.react-multi-carousel-dot--active button{background:#080808}
+/* OBS: rem y em NO dependen del tamaño de fuente html (font-size) en las media queries!. (1rem = 1em = 16px) */
 
-.react-multi-carousel-item{transform-style:preserve-3d;backface-visibility:hidden}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){
-.react-multi-carousel-item{flex-shrink:0 !important}
-.react-multi-carousel-track{overflow:visible !important}} */
+/* 1344px (Small desktops) */
+@media (max-width: 84em) { 
+  .react-multiple-carousel__arrow--left{left:calc(-0.1% + 1px) !important; top:calc(30% + 1px) !important}
+  .react-multiple-carousel__arrow--right{right:calc(-0.1% + 1px) !important; top:calc(30% + 1px) !important}
+}
+
+/* 1200px (Landscape Tablets) */
+@media (max-width: 75em) {
+  html {
+    font-size: 56.25%; /* 9px / 16px = 0.5625 = 56.25% */
+  }
+}
+
+/* 944px (Tablets) */
+@media (max-width: 59em) {
+  html {
+    font-size: 50%; /* 8px / 16px = 0.5 = 50% */
+  }
+}
+
+/* 704px (Small tablets) */
+@media (max-width: 44em) {}
+
+/* 544px (Phones) */
+@media (max-width: 34em) {}

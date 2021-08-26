@@ -1,6 +1,5 @@
 .tracks {
-  /* padding-top: 10rem; */
-  padding-top: 9rem;
+  margin-top: 9rem;
   color: #fff;
 }
 
@@ -15,15 +14,20 @@
 /*    Media Queries     */
 /************************/
 
-/* 944px (Tablets) */
-/* @media (max-width: 59em) { 
+@media (max-width: 84em) { /* 1344px (Small desktops)*/
   .tracks {
-    padding-top: 5rem;
-  } 
-}  */
+    margin: 6rem 0;
+  }
+}
+
+@media (max-width: 59em) { /* 944px (Tablets) */
+  .tracks {
+    margin: 7rem 0;
+  }
+}
 
 @media (max-width: 44em) { /* 704px (Small tablets) */
   .tracks {
-    padding-top: 5rem;
+    margin: 5rem 0;
   }   
 }

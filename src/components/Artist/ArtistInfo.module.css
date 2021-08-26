@@ -4,7 +4,7 @@
 }
 
 .background {
-  height: 60vh;
+  height: 60%;
   background-size: cover;
   box-shadow: inset 0 -22px 90px 100px #030303; 
 
@@ -77,13 +77,13 @@
 
 @media (max-width: 84em) { /* 1344px (Small desktops)*/
   .content { 
-    padding-top: 22rem;
+    padding-top: 24rem;
   }
   .content h2 { 
     font-size: 3.5rem; 
   }
   .background { 
-    height: 65vh;
+    height: 70%;
   }
 }
 
@@ -110,7 +110,20 @@
 }
 
 @media (max-width: 34em) { /* 544px (Phones) */
+  .content {
+    padding-top: 22rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .content p {
+    width: 40rem;
+    margin: 0 auto 1.5rem;
+  }
+  .content div {
+    justify-content: center;
+  }
   .background {
-    height: auto;
+    background-position: 50%;
+    background-size: cover;
   } 
 }

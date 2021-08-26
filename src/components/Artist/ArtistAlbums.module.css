@@ -1,5 +1,5 @@
 .albums {
-  padding-top: 9rem;
+  margin-top: 9rem;
   color: #fff;
 }
 
@@ -14,8 +14,26 @@
 /*    Media Queries     */
 /************************/
 
+@media (max-width: 84em) { /* 1344px (Small desktops)*/
+  .albums {
+    margin: 7rem 0 14rem;
+  }
+}
+
 @media (max-width: 59em) { /* 944px (Tablets) */
   .albums {
-    padding-top: 5rem;
+    margin: 7rem 0 16rem;
+  }
+}
+
+@media (max-width: 44em) { /* 704px (Small tablets) */
+  .albums {
+    margin: 6rem 0;
+  }
+}
+
+@media (max-width: 34em) { /* 544px (Phones) */
+  .albums {
+    margin: 5rem 0;
   }
 }

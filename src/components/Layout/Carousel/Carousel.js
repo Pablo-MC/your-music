@@ -9,20 +9,20 @@ const Carousel = ({ title, items, category }) => {
   const params = useParams();
 
   const responsive = {
+    bigDesktop: {
+      breakpoint: { max: 3000, min: 1344 }, items: 6, slidesToSlide: 6,
+    },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-      slidesToSlide: 6,
+      breakpoint: { max: 1344, min: 1235 }, items: 5, slidesToSlide: 5,
+    },
+    smallDesktop: {
+      breakpoint: { max: 1235, min: 790 }, items: 4, slidesToSlide: 4,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-      slidesToSlide: 3
+      breakpoint: { max: 790, min: 544 }, items: 3, slidesToSlide: 3
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1
+      breakpoint: { max: 544, min: 0 }, items: 3, slidesToSlide: 3
     }
   };
 
@@ -39,29 +39,12 @@ const Carousel = ({ title, items, category }) => {
     }
   }
 
-  // function CustomRightArrow({ onClick }) {
-  //   return (
-  //     <button
-  //       // onClick={handleClick}
-  //       aria-label="Go to next slide"
-  //       className="react-multiple-carousel__arrow react-multiple-carousel__arrow--right"
-  //     // className={classes['react-multiple-carousel__arrow]['react-multiple-carousel__arrow--right']}
-  //     // className={classes['react-multiple-carousel__arrow--right']}
-
-  //     />
-  //   );
-  // }
-
   return (
     <section className={classes.carousel}>
       {title && <h2>{title}</h2>}
       <SliderCarousel
         responsive={responsive}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-      // itemClass={}
-      // centerMode={true}
-      // focusOnSelect={true}
-      // customRightArrow={<CustomRightArrow />}
+      // removeArrowOnDeviceType={['tablet', 'mobile']}
       >
         {items.map(item =>
           <div key={shortid.generate()} className={classes.item}>

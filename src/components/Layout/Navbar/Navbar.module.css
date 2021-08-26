@@ -15,8 +15,8 @@
 
 .nav ul {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   list-style: none;
   gap: 4.8rem;
 }
@@ -25,17 +25,21 @@
   font-size: 2rem;
   text-decoration: none;
   color: #fff;
-  opacity: 50%;
+  opacity: 0.5;
 }
 
 .nav a:hover,
 .nav a:active,
 .nav a.active {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .logo {
   height: 2.4rem;
+}
+
+.phone {
+  display: none;
 }
 
 .avatar {
@@ -43,4 +47,21 @@
   padding: .1rem;
   border-radius: 50%;  
   border: .1rem solid rgb(39, 38, 38);
+}
+
+
+/************************/
+/*    Media Queries     */
+/************************/
+
+@media (max-width: 34em) { /* 544px (Phones) */
+  .desktop {
+    display: none;
+  }
+  .phone {
+    display: block;
+  }
+  .logo_phone {
+    height: 2.4rem;
+  }
 }

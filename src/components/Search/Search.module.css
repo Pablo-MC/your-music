@@ -5,7 +5,7 @@
   align-items: center;
   
   width: 80rem;
-  height: 5vh;
+  height: 70%;
   border-radius: .2rem;  
   background-color: #333;
   
@@ -51,21 +51,30 @@
 }
 
 
-/**************************/
-/*     Media Queries      */
-/**************************/
+/************************/
+/*    Media Queries     */
+/************************/
 
 @media (max-width: 84em) {  /* 1344px (Small desktops) */
   .form {
     width: 60rem;
-    height: 8vh;
+  }
+}
+
+@media (max-width: 75em) { /* 1200px (Landscape Tablets) */
+  .form {
+    width: 55rem;
+    height: 72%;
+  }
+  .form input {
+    flex: 1 0 92%;
   }
 }
 
 @media (max-width: 59em) { /* 944px (Tablets) */
   .form {
     width: 50rem; 
-    height: 7vh;
+    height: 70%;
   }
   .form input {
     flex: 1 0 90%;
@@ -74,6 +83,14 @@
 
 @media (max-width: 44em) { /* 704px (Small tablets) */
   .form {
-    width: 35rem;
+    width: 33rem;
+  }
+  .form input {
+    flex: 1 0 92%;
+  }
+  .form .close {
+    flex: 1 0 10%;
+    font-size: 2rem;
+    padding-right: 6rem;
   }
 }

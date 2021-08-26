@@ -3,9 +3,13 @@ import { Link, NavLink } from 'react-router-dom';
 import { getSpotifyUser } from '../../../lib/api';
 import classes from './Navbar.module.css';
 
-import logo from '../../../assets/logo.svg'
+import logo from '../../../assets/logo.svg';
 import search from '../../../assets/search.svg';
 import avatar from '../../../assets/avatar.svg';
+import logo_phone from '../../../assets/logo_phone.svg';
+import home_phone from '../../../assets/home_phone.svg';
+import explore_phone from '../../../assets/explore_phone.svg';
+import library_phone from '../../../assets/library_phone.svg';
 
 import Search from '../../Search/Search';
 
@@ -33,19 +37,24 @@ const Navbar = () => {
 
   return (
     <header className={classes.header}>
-      <Link to='/'><img src={logo} alt='logo' className={classes.logo} /></Link>
+      <Link to='/' className={classes.desktop}><img src={logo} alt='logo' className={classes.logo} /></Link>
+      <Link to='/' className={classes.phone}><img src={logo_phone} alt='logo_phone' className={classes.logo_phone} /></Link>
       <nav className={classes.nav}>
         <ul>
-          <li><NavLink exact to='/' activeClassName={classes.active}>Principal</NavLink></li>
-          <li><NavLink to='/explore' activeClassName={classes.active}>Explorar</NavLink></li>
-          <li><NavLink to='/library' activeClassName={classes.active}>Biblioteca</NavLink></li>
+          <li className={classes.desktop}><NavLink exact to='/' activeClassName={classes.active}>Principal</NavLink></li>
+          <li className={classes.desktop}><NavLink to='/explore' activeClassName={classes.active}>Explorar</NavLink></li>
+          <li className={classes.desktop}><NavLink to='/library' activeClassName={classes.active}>Biblioteca</NavLink></li>
+
+          <li className={classes.phone}><NavLink exact to='/' activeClassName={classes.active}><img src={home_phone} alt='home' /></NavLink></li>
+          <li className={classes.phone}><NavLink to='/explore' activeClassName={classes.active}><img src={explore_phone} alt='explore' /></NavLink></li>
+          <li className={classes.phone}><NavLink to='/library' activeClassName={classes.active}><img src={library_phone} alt='library' /></NavLink></li>
           {!searchIsShown
             ? <li><NavLink to='#'><img src={search} alt='search' onClick={() => setSearchIsShown(true)} /></NavLink></li>
             : <Search onClosedSearch={closeSearchHandler} />
           }
         </ul>
       </nav>
-      <Link to='/'><img src={user ? user.photo : avatar} alt="avatar" className={classes.avatar} /></Link>
+      <Link to='/'><img src={user ? user.photo : avatar} alt='avatar' className={classes.avatar} /></Link>
     </header>
   );
 }

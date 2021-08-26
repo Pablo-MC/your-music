@@ -107,3 +107,11 @@
     flex: 0 0 12%;
   } 
 }
+
+@media (max-width: 34em) { /* 544px (Phones) */
+
+  /* album */
+  .track p:nth-child(3) {
+    display: none;
+  }
+}
