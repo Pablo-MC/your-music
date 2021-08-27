@@ -83,9 +83,9 @@
 }
 
 
-/************************/
-/*    Media Queries     */
-/************************/
+/***********************/
+/*    Media Queries    */
+/***********************/
 
 @media (max-width: 59em) { /* 944px (Tablets) */
 
@@ -101,7 +101,7 @@
   }
 }
 
-@media (max-width: 44em) { /* 704px (Smaller tablets) */
+@media (max-width: 44em) { /* 704px (Small tablets) */
 
   /* artist */
   .track p:first-of-type {

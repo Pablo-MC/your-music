@@ -18,13 +18,21 @@
 .item img {
   /* width: 100%; */
   max-width: 100%;
-  height: auto;
   cursor: pointer;
+
+  /* height: auto; */
+  /* height: 12em; */
+  /* object-fit: cover; */
 }
 
 .item h4 {
   margin: 1rem 0 .5rem;
   letter-spacing: .05em;
+
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .item p {
@@ -47,9 +55,9 @@
 }
 
 
-/************************/
-/*    Media Queries     */
-/************************/
+/***********************/
+/*    Media Queries    */
+/***********************/
 
 @media (max-width: 84em) { /* 1344px (Small desktops)*/
   .item {

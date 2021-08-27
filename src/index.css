@@ -28,9 +28,9 @@ main {
 }
 
 
-/************************/
-/*   Carousel Arrows    */
-/************************/
+/***********************/
+/*   Carousel Arrows   */
+/***********************/
 
 .react-multiple-carousel__arrow{background: #fff !important;min-width: 3.4rem !important;min-height:3.4rem !important;opacity:1;cursor:pointer; box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !important}
 
@@ -41,17 +41,14 @@ main {
 .react-multiple-carousel__arrow--right{right:calc(0% + 1px) !important; top:calc(30% + 1px) !important}
 
 
-/************************/
-/*    Media Queries     */
-/************************/
+/***********************/
+/*    Media Queries    */
+/***********************/
 
-/* OBS: rem y em NO dependen del tamaño de fuente html (font-size) en las media queries!. (1rem = 1em = 16px) */
+/* OBS: 1em = 16px */
 
 /* 1344px (Small desktops) */
-@media (max-width: 84em) { 
-  .react-multiple-carousel__arrow--left{left:calc(-0.1% + 1px) !important; top:calc(30% + 1px) !important}
-  .react-multiple-carousel__arrow--right{right:calc(-0.1% + 1px) !important; top:calc(30% + 1px) !important}
-}
+@media (max-width: 84em) {}
 
 /* 1200px (Landscape Tablets) */
 @media (max-width: 75em) {
@@ -72,6 +69,6 @@ main {
 
 /* 544px (Phones) */
 @media (max-width: 34em) {
-  .react-multiple-carousel__arrow--left{left:calc(-0.1% + 1px) !important; top:calc(22% + 1px) !important}
-  .react-multiple-carousel__arrow--right{right:calc(-0.1% + 1px) !important; top:calc(22% + 1px) !important}
+  .react-multiple-carousel__arrow--left{left:calc(-0.1% + 1px) !important; top:calc(23% + 1px) !important}
+  .react-multiple-carousel__arrow--right{right:calc(-0.1% + 1px) !important; top:calc(23% + 1px) !important}
 }
