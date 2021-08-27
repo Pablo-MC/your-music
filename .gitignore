@@ -1,8 +1,12 @@
 # dependencies
 node_modules
 
+# production
+build
+
 # eslint
 .eslintcache
 
 # environment variables
 .env.development.local
+.env.production.local
