@@ -9,13 +9,8 @@ import Spinner from '../components/UI/Spinner';
 const Album = (props) => {
   const params = useParams();
   const history = useHistory();
-  const [album, setAlbum] = useState({})
+  const [album, setAlbum] = useState({});
   const [spinner, setSpinner] = useState(true);
-
-  // Averiguar como reproducir un album completo.
-  // const playAlbumHandler = (album) => {
-  // console.log(album);
-  // }
 
   useEffect(() => {
     async function fetchData() {
@@ -31,19 +26,19 @@ const Album = (props) => {
 
     setTimeout(() => {
       setSpinner(false);
-    }, 2000);
+    }, 2500);
   }, [params.artist, params.album, history]);
 
-  const selectTrackHandler = (track) => {
+  const trackHandler = (track) => {
     props.onPlayTrack(track);
   }
 
   return (
     <Fragment>
       {spinner ? <Spinner /> : Object.entries(album || {}).length !== 0 &&
-        <section style={{ marginBottom: '15rem' }}>
-          <AlbumInfo info={album} />
-          <TrackList tracks={album.tracks} onSelectTrack={selectTrackHandler} />
+        <section style={{ marginBottom: '14rem' }}>
+          <AlbumInfo info={album} onPlayAlbum={trackHandler} />
+          <TrackList tracks={album.tracks} onPlaySelectTrack={trackHandler} />
         </section>
       }
     </Fragment>

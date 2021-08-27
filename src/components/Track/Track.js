@@ -9,12 +9,12 @@ const Track = (props) => {
     return min + ":" + (sec < 10 ? '0' : '') + sec;
   }
 
-  const clickTrackHandler = (track) => {
-    props.onTrack(track);
+  const trackHandler = (track) => {
+    props.onSelectTrack(track);
   }
 
   return (
-    <div className={classes[`${type}`]} onClick={() => clickTrackHandler(trackURI)}>
+    <div className={classes[`${type}`]} onClick={() => trackHandler(trackURI)}>
       <div className={classes.content}>
         {type === 'track' ? <img src={imgAlbumURL} alt={trackTitle} /> : <span style={{ marginRight: '3rem' }}>{trackNumber}</span>}
         <span>{trackTitle}</span>

@@ -6,7 +6,15 @@ import radio from '../../assets/radio.svg';
 import music from '../../assets/music.svg';
 
 const ArtistInfo = (props) => {
-  const { artist, biography, followers, backgroundImg } = props.info;
+  const { artist, biography, followers, backgroundImg, tracks } = props.info;
+
+  const randomTracksHandler = () => {
+    const randomTracks = tracks
+      .map(track => track.trackURI)
+      .sort(() => Math.random() - 0.5); // Ordenar aleatoriamente los elementos de un array
+
+    props.onPlayRandomTracks(randomTracks);
+  }
 
   return (
     <div style={{ backgroundImage: `url(${backgroundImg})` }} className={classes.background}>
@@ -16,9 +24,9 @@ const ArtistInfo = (props) => {
           <p>{biography}</p>
           {/* Agregar acá la opción de exapandir/contraer la biografía 'MÁS/MENOS'*/}
           <div>
-            <button><img src={shuffle} alt='play' />Aleatorio</button>
+            <button onClick={randomTracksHandler} ><img src={shuffle} alt='play' />Aleatorio</button>
             <button><img src={radio} alt='radio' />Radio</button>
-            <button>Suscriptores <img src={music} alt='radio' />{followers}</button>
+            <button onClick={followers + 1}>Suscriptores <img src={music} alt='radio' />{followers}</button>
           </div>
         </div>
       </Container>

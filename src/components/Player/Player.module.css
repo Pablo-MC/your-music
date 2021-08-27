@@ -3,4 +3,11 @@
   width: 100%;
   bottom: 0;
   z-index: 2000;
+
+  animation: fadeIn 4s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0}
+  100% {opacity:1}
 }

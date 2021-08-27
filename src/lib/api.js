@@ -38,7 +38,7 @@ export const getSpotifyUser = async function () {
     }
 
   } catch (error) {
-    console.error('Usuario NO Premium', error.message); // OBS: Si el usuario no es premium, entra al catch.
+    console.error('Usuario NO Premium', error.message);
   }
 }
 
@@ -138,7 +138,7 @@ export const getAlbumData = async function (artist, albumTitle) {
       imgURL: album.data.tracks.items[0].album.images[0].url,
       releaseDate: album.data.tracks.items[0].album.release_date.slice(0, 4), // Solamente el año.
       totalTracks: album.data.tracks.items[0].album.total_tracks,
-      albumURI: album.data.tracks.items[0].album.uri, // URI que reproduce todos los tracks. Falta implementar.
+      albumURI: album.data.tracks.items[0].album.uri, // URI que reproduce todos los tracks.
       tracks: tracks,
     }
 
@@ -149,9 +149,9 @@ export const getAlbumData = async function (artist, albumTitle) {
   }
 }
 
-/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Retorna un array con el nombre (string) de 15 artistas Top aleatorios. // ["artist", "artist", ...]
+// Retorna un array con el nombre de 15 artistas Top aleatorios. // ["artist", "artist", ...]
 const getRandomTopArtist = async function () {
   try {
     const artists = await axios(`https://api.spotify.com/v1/search?q=genre:"rock"&type=artist&limit=50`, {
@@ -163,7 +163,7 @@ const getRandomTopArtist = async function () {
       }
     }); // [{artist}, {artist}, ...]
 
-    const poorImgQuality = ['Lynyrd Skynyrd', 'Queen', 'AC/DC', 'Nirvana', 'Weezer', 'Pink Floyd', 'Grateful Dead', 'Creedence Clearwater Revival'];
+    const poorImgQuality = ['Lynyrd Skynyrd', 'Queen', 'AC/DC', 'Nirvana', 'Weezer', 'Pink Floyd', 'Grateful Dead', 'Creedence Clearwater Revival', 'Chase Atlantic'];
 
     return artists.data.artists.items
       .sort(() => Math.random() - 0.5) // Ordenar aleatoriamente los elementos de un array.
@@ -255,7 +255,6 @@ const getAlbums = async function (artist) {
         return {
           album: album.name,
           imgURL: album.images[0].url,
-          // albumURI: album.uri, // URI que reproduce todos los tracks. Falta implementar
         }
       })
       .filter(element => hash[element.album] ? false : hash[element.album] = true); // Eliminar albumes duplicados. 

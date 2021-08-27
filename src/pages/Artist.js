@@ -29,7 +29,7 @@ const Artist = (props) => {
     }, 2500);
   }, [params.artist, history]);
 
-  const selectTrackHandler = (track) => {
+  const trackHandler = (track) => {
     props.onPlayTrack(track);
   }
 
@@ -37,8 +37,8 @@ const Artist = (props) => {
     <Fragment>
       {spinner ? <Spinner /> : Object.entries(artist || {}).length !== 0 &&
         <section style={{ marginBottom: '14rem' }}>
-          <ArtistInfo info={artist} />
-          <TrackList tracks={artist.tracks} onSelectTrack={selectTrackHandler} />
+          <ArtistInfo info={artist} onPlayRandomTracks={trackHandler} />
+          <TrackList tracks={artist.tracks} onPlaySelectTrack={trackHandler} />
           <ArtistAlbums albums={artist.albums} />
         </section>
       }

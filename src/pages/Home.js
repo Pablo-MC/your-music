@@ -37,8 +37,8 @@ const Home = () => {
 
       setTimeout(() => {
         setSpinner(false);
-      }, 2000);
-    }, 1500);
+      }, 2500);
+    }, 2000);
   }, [history]);
 
   return (
@@ -51,7 +51,7 @@ const Home = () => {
             category='artists'
           />
           <Carousel
-            title='Tu música para el atardecer'
+            title='Álbumes recomendados'
             items={data.albums}
             category='albums'
           />

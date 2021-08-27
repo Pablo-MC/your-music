@@ -10,10 +10,10 @@ const Carousel = ({ title, items, category }) => {
 
   const responsive = {
     bigDesktop: {
-      breakpoint: { max: 3000, min: 1344 }, items: 6, slidesToSlide: 6,
+      breakpoint: { max: 3000, min: 1500 }, items: 6, slidesToSlide: 6,
     },
     desktop: {
-      breakpoint: { max: 1344, min: 1235 }, items: 5, slidesToSlide: 5,
+      breakpoint: { max: 1500, min: 1235 }, items: 5, slidesToSlide: 5,
     },
     smallDesktop: {
       breakpoint: { max: 1235, min: 790 }, items: 4, slidesToSlide: 4,

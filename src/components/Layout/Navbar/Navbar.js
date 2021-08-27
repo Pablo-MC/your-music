@@ -45,9 +45,9 @@ const Navbar = () => {
           <li className={classes.desktop}><NavLink to='/explore' activeClassName={classes.active}>Explorar</NavLink></li>
           <li className={classes.desktop}><NavLink to='/library' activeClassName={classes.active}>Biblioteca</NavLink></li>
 
-          <li className={classes.phone}><NavLink exact to='/' activeClassName={classes.active}><img src={home_phone} alt='home' /></NavLink></li>
-          <li className={classes.phone}><NavLink to='/explore' activeClassName={classes.active}><img src={explore_phone} alt='explore' /></NavLink></li>
-          <li className={classes.phone}><NavLink to='/library' activeClassName={classes.active}><img src={library_phone} alt='library' /></NavLink></li>
+          <li className={classes.phone}><NavLink exact to='/' activeClassName={classes.active}><img src={home_phone} alt='home_phone' /></NavLink></li>
+          <li className={classes.phone}><NavLink to='/explore' activeClassName={classes.active}><img src={explore_phone} alt='explore_phone' /></NavLink></li>
+          <li className={classes.phone}><NavLink to='/library' activeClassName={classes.active}><img src={library_phone} alt='library_phone' /></NavLink></li>
           {!searchIsShown
             ? <li><NavLink to='#'><img src={search} alt='search' onClick={() => setSearchIsShown(true)} /></NavLink></li>
             : <Search onClosedSearch={closeSearchHandler} />

@@ -6,8 +6,8 @@ import Container from '../UI/Container';
 
 const TrackList = (props) => {
 
-  const trackHandler = (track) => {
-    props.onSelectTrack(track);
+  const selectTrackHandler = (track) => {
+    props.onPlaySelectTrack(track);
   }
 
   return (
@@ -18,7 +18,7 @@ const TrackList = (props) => {
           <Track
             key={shortid.generate()}
             data={track}
-            onTrack={trackHandler}
+            onSelectTrack={selectTrackHandler}
           />
         )}
       </div>
