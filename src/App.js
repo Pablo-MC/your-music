@@ -8,6 +8,8 @@ import Album from './pages/Album';
 import Navbar from './components/Layout/Navbar/Navbar';
 import Login from './components/Login/Login';
 import Player from './components/Player/Player';
+import NotFound from './components/UI/NotFound';
+import InProgress from './components/UI/InProgress';
 import Notification from './components/UI/Notification.js';
 
 function App() {
@@ -48,13 +50,12 @@ function App() {
               <Album onPlayTrack={playTrackHandler} />
             </Route>
 
-            <Route path='/explore'> </Route>
-            <Route path='/library'> </Route>
+            <Route path='/explore' component={InProgress} />
+            <Route path='/library' component={InProgress} />
 
             <Route path='/notification/:msg' component={Notification} />
 
-            {/* <Route path='*' component={NotFound} /> */}
-
+            <Route path='*' component={NotFound} />
           </Switch>
           {playerIsShown && <Player track={track} />}
         </main>
