@@ -53,12 +53,18 @@
   border: none;  
 }
 
-/* 3er boton */
+/* suscriptors button */
 .content button:last-child {
   color: rgba(255, 255, 255, 0.7);
   background-color: transparent;
   border: .1rem solid rgba(255, 255, 255, 0.7);
+  cursor: default;
   gap: .8rem;
+}
+
+/* radio button */
+.content button:nth-child(2) {
+  cursor: no-drop;
 }
 
 .content button:last-child img {
