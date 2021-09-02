@@ -1,0 +1,25 @@
+.about {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+
+  animation: fadeIn 3s;
+}
+
+.about span {
+  font-size: 2.5rem;
+  color: #f00;
+}
+
+.link {
+  color: #f00;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0}
+  100% {opacity:1}
+}
