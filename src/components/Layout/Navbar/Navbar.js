@@ -37,8 +37,8 @@ const Navbar = () => {
 
   return (
     <header className={classes.header}>
-      <Link to='/' className={classes.desktop}><img src={logo} alt='logo' className={classes.logo} /></Link>
-      <Link to='/' className={classes.phone}><img src={logo_phone} alt='logo_phone' className={classes.logo_phone} /></Link>
+      <Link to='/about' className={classes.desktop}><img src={logo} alt='logo' className={classes.logo} /></Link>
+      <Link to='/about' className={classes.phone}><img src={logo_phone} alt='logo_phone' className={classes.logo_phone} /></Link>
       <nav className={classes.nav}>
         <ul>
           <li className={classes.desktop}><NavLink exact to='/' activeClassName={classes.active}>Principal</NavLink></li>
@@ -49,7 +49,7 @@ const Navbar = () => {
           <li className={classes.phone}><NavLink to='/explore' activeClassName={classes.active}><img src={explore_phone} alt='explore_phone' /></NavLink></li>
           <li className={classes.phone}><NavLink to='/library' activeClassName={classes.active}><img src={library_phone} alt='library_phone' /></NavLink></li>
           {!searchIsShown
-            ? <li><NavLink to='#'><img src={search} alt='search' onClick={() => setSearchIsShown(true)} /></NavLink></li>
+            ? <li><NavLink to='#'><img src={search} alt='search' className={classes.search} onClick={() => setSearchIsShown(true)} /></NavLink></li>
             : <Search onClosedSearch={closeSearchHandler} />
           }
         </ul>

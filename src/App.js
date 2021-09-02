@@ -6,6 +6,7 @@ import Artist from './pages/Artist';
 import Album from './pages/Album';
 
 import Navbar from './components/Layout/Navbar/Navbar';
+import About from './components/Layout/About/About';
 import Login from './components/Login/Login';
 import Player from './components/Player/Player';
 import NotFound from './components/UI/NotFound';
@@ -52,6 +53,7 @@ function App() {
 
             <Route path='/explore' component={InProgress} />
             <Route path='/library' component={InProgress} />
+            <Route path='/about' component={About} />
 
             <Route path='/notification/:msg' component={Notification} />
 

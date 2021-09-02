@@ -33,6 +33,11 @@
   margin: 0.4rem 0 4rem;
 }
 
+.content img {
+  width: 1.7rem;
+  margin-right: 1rem;
+}
+
 .content button {
   display: inline-flex;
   font-family: 'Roboto', sans-serif;
@@ -43,6 +48,7 @@
   padding: 1rem 2rem;
   border-radius: .2rem;
   border: none;  
+  outline: none;
   cursor: pointer;
 }
 
@@ -52,11 +58,6 @@
   background-color: transparent;
   border: .1rem solid rgba(255, 255, 255, 0.7);
   cursor: no-drop;
-}
-
-.content img {
-  width: 1.7rem;
-  margin-right: 1rem;
 }
 
 

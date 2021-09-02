@@ -26,7 +26,7 @@ const ArtistInfo = (props) => {
           <div>
             <button onClick={randomTracksHandler} ><img src={shuffle} alt='play' />Aleatorio</button>
             <button><img src={radio} alt='radio' />Radio</button>
-            <button onClick={followers + 1}>Suscriptores <img src={music} alt='radio' />{followers}</button>
+            <button>Suscriptores <img src={music} alt='radio' />{followers}</button>
           </div>
         </div>
       </Container>

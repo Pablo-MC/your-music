@@ -1,6 +1,10 @@
+import { useHistory } from 'react-router';
 import classes from './Track.module.css';
 
+import play from '../../assets/play_white.svg';
+
 const Track = (props) => {
+  const history = useHistory();
   const { type, artist, album, imgAlbumURL, trackTitle, trackURI, duration, trackNumber } = props.data;
 
   const millisecToMinAndSec = function (millisec) {
@@ -14,14 +18,18 @@ const Track = (props) => {
   }
 
   return (
-    <div className={classes[`${type}`]} onClick={() => trackHandler(trackURI)}>
+    <div className={classes[`${type}`]}>
       <div className={classes.content}>
-        {type === 'track' ? <img src={imgAlbumURL} alt={trackTitle} /> : <span style={{ marginRight: '3rem' }}>{trackNumber}</span>}
-        <span>{trackTitle}</span>
+        {type === 'track'
+          ? <img src={imgAlbumURL} alt={trackTitle} className={classes['img-album']} />
+          : <span className={classes['track-number']}>{trackNumber}</span>
+        }
+        <img src={play} alt='play icon' className={classes['play-icon']} onClick={() => trackHandler(trackURI)} />
+        <span className={classes['track-title']} onClick={() => trackHandler(trackURI)}>{trackTitle}</span>
       </div>
-      <p>{artist}</p>
-      <p>{album}</p>
-      <p>{millisecToMinAndSec(duration)}</p>
+      <p className={classes.artist}>{artist}</p>
+      <p className={classes['album-title']} onClick={() => history.push(`/artist/${artist}/${album}`)}>{album}</p>
+      <p className={classes.duration}>{millisecToMinAndSec(duration)}</p>
     </div>
   );
 }

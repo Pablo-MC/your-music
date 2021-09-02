@@ -38,15 +38,13 @@
   height: 2.4rem;
 }
 
-.phone {
-  display: none;
+.avatar {
+  height: 2.6rem;
+  border-radius: 50%;  
 }
 
-.avatar {
-  width: 3.2rem;
-  padding: .1rem;
-  border-radius: 50%;  
-  border: .1rem solid rgb(39, 38, 38);
+.phone {
+  display: none;
 }
 
 
@@ -61,7 +59,11 @@
   .phone {
     display: block;
   }
+  .search {
+    margin-bottom: .8rem;
+    height: 3.4rem;
+  }
   .logo_phone {
-    height: 2.4rem;
+    height: 2.6rem;
   }
 }

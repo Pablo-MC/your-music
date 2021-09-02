@@ -41,6 +41,11 @@
   flex-wrap: wrap;
 }
 
+.content img {
+  width: 1.7rem;
+  margin-right: 1rem;
+}
+
 .content button {
   display: inline-flex;
   font-family: 'Roboto', sans-serif;
@@ -50,7 +55,8 @@
   cursor: pointer;
   padding: 1rem 2rem;
   border-radius: .2rem;
-  border: none;  
+  border: none;
+  outline: none;  
 }
 
 /* suscriptors button */
@@ -62,18 +68,13 @@
   gap: .8rem;
 }
 
-/* radio button */
-.content button:nth-child(2) {
-  cursor: no-drop;
-}
-
 .content button:last-child img {
   margin: 0;
 }
 
-.content img {
-  width: 1.7rem;
-  margin-right: 1rem;
+/* radio button */
+.content button:nth-child(2) {
+  cursor: no-drop;
 }
 
 

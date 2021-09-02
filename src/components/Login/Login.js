@@ -11,7 +11,7 @@ const Login = (props) => {
     <Container>
       <div className={classes.login}>
         <img src={login} alt='Music Logo' />
-        <p>Para acceder a la aplicación debes ingresar a tu cuenta premium de Spotify haciendo click en el siguiente botón</p>
+        <p>~ Para acceder a la aplicación debes iniciar sesión utilizando tu cuenta de Spotify haciendo click en el siguiente botón ~</p>
         <a
           href={AUTH_URL}
           className={classes.btn}

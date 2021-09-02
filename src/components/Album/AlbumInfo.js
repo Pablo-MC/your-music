@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Container from '../UI/Container';
 
-import play from '../../assets/play.svg';
+import play from '../../assets/play_black.svg';
 import library from '../../assets/library.svg';
 
 const AlbumInfo = (props) => {

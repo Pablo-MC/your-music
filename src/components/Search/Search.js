@@ -7,7 +7,7 @@ const Search = (props) => {
   const [artist, setArtist] = useState('');
 
   const titleCase = artist => {
-    const minorWords = ['el', 'la', 'de', 'del', 'los', 'the', 'a', 'and', 'of', 'in'];
+    const minorWords = ['el', 'la', 'de', 'del', 'los', 'y', 'the', 'a', 'and', 'of', 'in'];
     return artist
       .split(' ')
       .filter(str => str !== '')

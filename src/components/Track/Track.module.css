@@ -6,8 +6,12 @@
   font-size: 1.6rem;
   font-weight: 500;
   padding: 1rem;
-  cursor: pointer;
-  border-bottom: 1px solid rgb(39, 38, 38);  
+  cursor: default;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.album {
+  padding: 1.9rem 0;
 }
 
 .track:last-child,
@@ -18,25 +22,51 @@
 .track:hover,
 .album:hover {
   background-color: #212121;
-  border-radius: 1rem;
-  /* border-bottom: 1px solid green; */
-  /* border-bottom: 1px solid #55c57a; */
+  border-radius: 1rem;  
 }
 
-.track img {
-  width: 4vmin;
-  border-radius: .5rem;
-  margin-right: 2rem;  
+.track:hover .play-icon,
+.album:hover .play-icon {
+  opacity: 1;
+}
+
+.track:hover .img-album {
+  opacity: 0.1;
+}
+
+.album:hover .track-number {
+  opacity: 0;
 }
 
 .content {
   display: flex;
   align-items: center;
-  color: #fff;
   flex: 1 0 20%;
 } 
 
-.content span:last-child {
+.play-icon {
+  position: absolute;
+  opacity: 0;
+
+  width: 2rem;
+  margin-left: .7rem;
+  cursor: pointer;
+}
+
+.img-album {
+  width: 3.2rem;
+  border-radius: .3rem;
+}
+
+.track-number {
+  margin-right: 3rem;
+}
+
+.track-title {
+  margin-left: 2.2rem;
+  color: #fff;
+  cursor: pointer;
+
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 1;
@@ -56,29 +86,30 @@
   -webkit-box-orient: vertical;
 }
 
-.track p:last-of-type {
+.album-title {
+  cursor: pointer;
+}
+
+.track .duration {
   text-align: end;
 }
 
-.album {
-  padding: 2rem 0;
+.album .play-icon {
+  margin-left: 2.5rem;
 }
 
-.album span {
-  margin-left: 1.8rem;
-  color:#fff;
-}
-
-.album span:first-child {
+.album .track-number {
   flex: 0 0 2%;
   text-align: center;
+  margin-left: 1.8rem;
+  color: #fff;
 }
 
-.album span:last-child {
+.album .track-title {
   margin-left: .2rem;
 }
 
-.album p {
+.album .duration {
   margin-right: 1.5rem;
 }
 
@@ -87,48 +118,48 @@
 /*    Media Queries    */
 /***********************/
 
+@media (max-width: 84em) { /* 1344px (Small desktops)*/
+
+  .album .play-icon {
+    margin-left: 2rem;
+  }
+}
+
 @media (max-width: 59em) { /* 944px (Tablets) */
 
-   /* duration  */
-  .album p:last-of-type {
+  .album .track-number {
+    flex: 0 0 2.5%;
+  }
+
+  .album .duration {
     flex: 0 1 15%;
     text-align: end;
   }  
-
-  /* track number */
-  .album span:first-child {
-    flex: 0 0 2.5%;
-  }
 }
 
 @media (max-width: 44em) { /* 704px (Small tablets) */
 
-  /* artist */
-  .track p:first-of-type {
+  .album .track-number {
+    flex: 0 0 3%;
+  }
+
+  .track .artist {
     display: none;
   }
 
-  /* duration  */
-  .track p:last-of-type { 
+  .track .duration { 
     margin-left: 0;
     flex: 0 0 12%;
-  }
-  
-  /* track number */
-  .album span:first-child {
-    flex: 0 0 3%;
   }
 }
 
 @media (max-width: 34em) { /* 544px (Phones) */
 
-  /* album */
-  .track p:nth-child(3) {
+  .track .album-title {
     display: none;
   }
 
-  /* track number */
-  .album span:first-child {
+  .album .track-number {
     flex: 0 0 5%;
   }
 }
