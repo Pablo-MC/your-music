@@ -92,6 +92,7 @@
 
 .track .duration {
   text-align: end;
+  flex: 1;
 }
 
 .album .play-icon {
@@ -113,6 +114,10 @@
   margin-right: 1.5rem;
 }
 
+.track .album-title {
+  flex: 1;
+  margin-left: 0; 
+}
 
 /***********************/
 /*    Media Queries    */
