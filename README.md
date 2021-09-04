@@ -2,6 +2,10 @@
 
 _A clone of YouTube Music_
 
-## Screenshot
+## Demo
+
+_[**Your Music**](https://yourmusicjs.netlify.app/)_
+
+## Screenshots
 
 <img src="/src/assets/screenshots.jpg" width="700">
