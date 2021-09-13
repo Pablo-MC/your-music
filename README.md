@@ -4,7 +4,7 @@ _A clone of YouTube Music_
 
 ## Demo
 
-_[**Your Music**](https://yourmusicjs.netlify.app/)_
+To listen to the songs, _[**Your Music**](https://yourmusicjs.netlify.app/)_ uses Spotify Web Player. This functionality is restricted to premium users only.
 
 ## Screenshots
 
