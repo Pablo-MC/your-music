@@ -69,7 +69,7 @@ export const getArtistData = async function (artist) {
     });
 
     // Imágen de Fondo. OBS: Sino existe retorna null.
-    const backgroundImg = await axios(`https://theaudiodb.com/api/v1/json/1/search.php?s=${artist}`);
+    const backgroundImg = await axios(`https://theaudiodb.com/api/v1/json/2/search.php?s=${artist}`);
 
     const albumsData = await getAlbums(artist);
     const tracksData = await getTopTenTracks(artist);
